@@ -7,6 +7,8 @@ import com.kaimanden.betyou.auth.AuthActivity;
 import com.kaimanden.betyou.models.User;
 import com.orhanobut.hawk.Hawk;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class MainActivity extends BaseAct {
 
     @Override
@@ -21,6 +23,7 @@ public class MainActivity extends BaseAct {
         User user = Hawk.get("user",null);
         if (user == null){
             Intent intent = new Intent(this, AuthActivity.class);
+            startActivity(intent);
             finish();
         }
     }

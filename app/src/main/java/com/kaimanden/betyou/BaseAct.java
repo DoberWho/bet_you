@@ -4,9 +4,13 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.kaimanden.betyou.events.AuthEvent;
+import com.kaimanden.betyou.events.BaseEvent;
 import com.kaimanden.betyou.tools.EmergencyHandler;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class BaseAct extends AppCompatActivity {
 
@@ -34,4 +38,8 @@ public class BaseAct extends AppCompatActivity {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(BaseEvent event) {/* Do something */};
+
 }

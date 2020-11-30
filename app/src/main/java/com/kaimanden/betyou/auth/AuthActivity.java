@@ -7,6 +7,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.kaimanden.betyou.BaseAct;
 import com.kaimanden.betyou.R;
+import com.kaimanden.betyou.events.AuthEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class AuthActivity extends BaseAct {
 
@@ -42,4 +47,7 @@ public class AuthActivity extends BaseAct {
 
         trans.commit();
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(AuthEvent event) {/* Do something */};
 }
