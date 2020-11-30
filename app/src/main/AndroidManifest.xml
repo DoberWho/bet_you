@@ -13,13 +13,7 @@
         android:theme="@style/Theme.BetYou">
 
         <activity
-            android:name=".auth.RecoveryActivity"
-            android:label="@string/title_activity_recovery"></activity>
-        <activity
-            android:name=".auth.RegisterActivity"
-            android:label="@string/title_activity_register" />
-        <activity
-            android:name=".auth.LoginActivity"
+            android:name=".auth.AuthActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".MainActivity">
             <intent-filter>
