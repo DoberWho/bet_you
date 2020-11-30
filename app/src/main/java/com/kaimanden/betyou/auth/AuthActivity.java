@@ -42,12 +42,24 @@ public class AuthActivity extends BaseAct {
     private void changeFragment(Fragment frg){
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction trans = manager.beginTransaction();
-
         trans.replace(R.id.act_auth_container, frg, "auth_fragment");
-
         trans.commit();
+        currentFrg = frg;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(AuthEvent event) {/* Do something */};
+    public void onMessageEvent(AuthEvent event) {
+        switch (event.frgType){
+            case RECOVERY:
+                changeFragment(frgRecovery);
+                break;
+            case REGISTER:
+                changeFragment(frgregister);
+                break;
+            default:
+            case LOGIN:
+                changeFragment(frgLogin);
+                break;
+        }
+    };
 }

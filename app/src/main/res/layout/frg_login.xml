@@ -34,7 +34,7 @@
         android:weightSum="100">
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/frg_login_login"
             style="@style/BtnAction"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:text="@string/btn_login" />
 
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/frg_login_register"
             style="@style/BtnSecondary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_recovery"
+        android:id="@+id/frg_login_recovery"
         style="@style/BtnLink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
