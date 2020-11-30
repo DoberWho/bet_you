@@ -1,9 +1,6 @@
 package com.kaimanden.betyou.auth;
 
 import android.os.Bundle;
-import android.widget.FrameLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,12 +14,21 @@ public class AuthActivity extends BaseAct {
     private Fragment frgRecovery = new RecoveryFragment();
     private Fragment frgregister = new RegisterFragment();
 
+    private Fragment currentFrg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_auth);
         initViews();
+        initFrg();
+    }
+
+    private void initFrg() {
+        if (currentFrg == null){
+            currentFrg = frgLogin;
+            changeFragment(currentFrg);
+        }
     }
 
     private void initViews() {
