@@ -1,7 +1,5 @@
 package com.kaimanden.betyou;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,7 +7,7 @@ import com.kaimanden.betyou.auth.AuthActivity;
 import com.kaimanden.betyou.models.User;
 import com.orhanobut.hawk.Hawk;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseAct {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

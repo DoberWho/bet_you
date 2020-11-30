@@ -13,6 +13,8 @@ public class BaseApp extends Application {
 		Hawk.init(this).build();
 	}
 
+
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 	    super.onConfigurationChanged(newConfig);
