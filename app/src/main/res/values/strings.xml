@@ -12,4 +12,5 @@
     <string name="email_hint">Tu Email</string>
     <string name="pass_hint">Tu Contraseña</string>
     <string name="btn_recovery">¿Te olvidaste?</string>
+    <string name="pass_hint_confirm">Confirma tu Contraseña</string>
 </resources>
