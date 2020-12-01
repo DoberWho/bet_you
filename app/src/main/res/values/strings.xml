@@ -15,6 +15,7 @@
     <string name="pass_hint_confirm">Confirma tu Contraseña</string>
     <string name="btn_recovery_action">Recuperar</string>
 
+    <string name="request_login_ok">Login => OK</string>
     <string name="request_register_ok">Registro de Usuario => OK</string>
     <string name="user_name"></string>
     <string name="user_subtitle"></string>
