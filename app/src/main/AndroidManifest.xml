@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kaimanden.betyou">
 
-
     <application
         android:name=".base.BaseApp"
         android:allowBackup="true"
@@ -11,9 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.BetYou">
-        <uses-library
-            android:name="com.google.android.wearable"
-            android:required="true" />
 
 
         <activity
