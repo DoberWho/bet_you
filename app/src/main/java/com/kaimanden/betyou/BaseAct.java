@@ -28,7 +28,6 @@ public class BaseAct extends AppCompatActivity {
         if(Thread.getDefaultUncaughtExceptionHandler() != exHandler)
             Thread.setDefaultUncaughtExceptionHandler(exHandler);
 
-
     }
 
     @Override
@@ -36,7 +35,6 @@ public class BaseAct extends AppCompatActivity {
         super.onStart();
         EventBus.getDefault().register(this);
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
     }
 
     @Override
