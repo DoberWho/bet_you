@@ -75,4 +75,18 @@ public class AuthController {
         OnCompleteListener<AuthResult> task = this.getCompletedTas(listener);
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(act, task);
     }
+
+    public void recovery(String email) {
+        OnCompleteListener<Void> task = new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+
+                }else{
+
+                }
+            }
+        };
+        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(act, task);
+    }
 }

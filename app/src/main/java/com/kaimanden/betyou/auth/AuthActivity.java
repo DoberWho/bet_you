@@ -38,6 +38,9 @@ public class AuthActivity extends BaseAct {
     }
 
     private void initViews() {
+
+
+
     }
 
     private void changeFragment(Fragment frg){

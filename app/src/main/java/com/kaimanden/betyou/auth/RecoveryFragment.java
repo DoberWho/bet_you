@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.kaimanden.betyou.BaseFrg;
 import com.kaimanden.betyou.R;
+import com.kaimanden.betyou.tools.AuthController;
 import com.kaimanden.betyou.tools.events.AuthEvent;
 
 
@@ -63,6 +64,8 @@ public class RecoveryFragment extends BaseFrg {
             edtEmail.setError(error);
             return;
         }
+
+        AuthController.init(getActivity()).recovery(email);
 
     }
 
