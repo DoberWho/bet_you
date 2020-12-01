@@ -1,11 +1,13 @@
 package com.kaimanden.betyou.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.kaimanden.betyou.BaseAct;
+import com.kaimanden.betyou.MainActivity;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.events.AuthEvent;
 
@@ -46,9 +48,18 @@ public class AuthActivity extends BaseAct {
         currentFrg = frg;
     }
 
+    private void goToMain(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(AuthEvent event) {
         switch (event.frgType){
+            case LOGIN_OK:
+            case REGISTER_OK:
+                goToMain();
+                break;
             case RECOVERY:
                 changeFragment(frgRecovery);
                 break;

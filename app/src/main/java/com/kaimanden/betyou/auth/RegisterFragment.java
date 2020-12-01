@@ -109,6 +109,8 @@ public class RegisterFragment extends Fragment {
             public void isOk(FirebaseUser user) {
                 String msg = getString(R.string.request_register_ok);
                 ToastController.init(getView()).showInfo(msg);
+                AuthEvent event = new AuthEvent(AuthEvent.FrgType.REGISTER_OK);
+                sendEvent(event);
             }
 
             @Override

@@ -5,7 +5,9 @@ public class AuthEvent {
     public static enum FrgType {
         LOGIN,
         REGISTER,
-        RECOVERY;
+        RECOVERY,
+        LOGIN_OK,
+        REGISTER_OK
     }
 
     public FrgType frgType = FrgType.LOGIN;

@@ -90,6 +90,10 @@ public class LoginFragment extends Fragment {
             public void isOk(FirebaseUser user) {
                 String msg = getString(R.string.request_login_ok);
                 ToastController.init(getView()).showInfo(msg);
+
+                AuthEvent event = new AuthEvent(AuthEvent.FrgType.LOGIN_OK);
+                sendEvent(event);
+
             }
 
             @Override

@@ -18,8 +18,8 @@ public class MainActivity extends BaseAct {
     }
 
     private void checkAuth() {
-        User user = Hawk.get("user",null);
-        if (user == null){
+
+        if (!AuthController.init(this).isLoged()){
             Intent intent = new Intent(this, AuthActivity.class);
             startActivity(intent);
             finish();
