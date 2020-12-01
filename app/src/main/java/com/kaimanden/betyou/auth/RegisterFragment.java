@@ -10,9 +10,12 @@ import android.widget.EditText;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseUser;
+import com.kaimanden.betyou.AuthController;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.ToastController;
 import com.kaimanden.betyou.tools.events.AuthEvent;
+import com.kaimanden.betyou.tools.listeners.AuthListener;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -34,9 +37,9 @@ public class RegisterFragment extends Fragment {
 
 
     private void initViews(View v) {
-        btnLogin    = v.findViewById(R.id.frg_recovery_login);
-        btnRegister = v.findViewById(R.id.frg_recovery_register);
-        btnRecovery = v.findViewById(R.id.frg_recovery_recovery);
+        btnLogin    = v.findViewById(R.id.frg_register_login);
+        btnRegister = v.findViewById(R.id.frg_register_register);
+        btnRecovery = v.findViewById(R.id.frg_register_recovery);
 
         edtEmail = v.findViewById(R.id.frg_register_email);
         edtPass = v.findViewById(R.id.frg_register_pass);
@@ -101,6 +104,19 @@ public class RegisterFragment extends Fragment {
             return;
         }
 
+        AuthController.init(getActivity()).register(email, pass, new AuthListener() {
+            @Override
+            public void isOk(FirebaseUser user) {
+                String msg = getString(R.string.request_register_ok);
+                ToastController.init(getView()).showInfo(msg);
+            }
+
+            @Override
+            public void isKo(String error) {
+                String msg = getString(R.string.request_register_ok);
+                ToastController.init(getView()).showError(error);
+            }
+        });
 
     }
 

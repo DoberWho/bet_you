@@ -15,6 +15,11 @@
     <string name="pass_hint_confirm">Confirma tu Contraseña</string>
     <string name="btn_recovery_action">Recuperar</string>
 
+    <string name="request_register_ok">Registro de Usuario => OK</string>
+    <string name="user_name"></string>
+    <string name="user_subtitle"></string>
+    <string name="user_budget"></string>
+
     <string name="error_empty_data">Requerido</string>
     <string name="error_pass_equals">Contraseña Deben ser Iguales</string>
     <string name="error_form_data">No se ha podido completar</string>
