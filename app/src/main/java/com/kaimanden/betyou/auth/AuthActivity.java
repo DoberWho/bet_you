@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.kaimanden.betyou.BaseAct;
-import com.kaimanden.betyou.MainActivity;
+import com.kaimanden.betyou.base.BaseAct;
+import com.kaimanden.betyou.main.MainActivity;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.events.AuthEvent;
 

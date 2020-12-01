@@ -3,7 +3,7 @@ package com.kaimanden.betyou.user;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.kaimanden.betyou.BaseAct;
+import com.kaimanden.betyou.base.BaseAct;
 import com.kaimanden.betyou.R;
 
 public class UserActivity extends BaseAct {

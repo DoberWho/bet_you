@@ -2,7 +2,7 @@ package com.kaimanden.betyou.tools;
 
 import android.util.Log;
 
-import com.kaimanden.betyou.BaseAct;
+import com.kaimanden.betyou.base.BaseAct;
 
 public class EmergencyHandler implements Thread.UncaughtExceptionHandler {
 

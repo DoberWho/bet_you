@@ -11,4 +11,9 @@
     <style name="BtnLink" parent="BtnAction">
         <item name="android:backgroundTint">@android:color/white</item>
     </style>
+
+    <style name="BtnMenu" parent="BtnAction">
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:tint">@color/primaryDarkColor</item>
+    </style>
 </resources>

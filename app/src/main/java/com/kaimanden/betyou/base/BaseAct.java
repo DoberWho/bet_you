@@ -1,4 +1,4 @@
-package com.kaimanden.betyou;
+package com.kaimanden.betyou.base;
 
 import android.os.Bundle;
 
