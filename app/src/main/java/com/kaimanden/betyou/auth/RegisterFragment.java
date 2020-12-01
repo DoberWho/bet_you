@@ -4,25 +4,62 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
 import com.kaimanden.betyou.R;
+import com.kaimanden.betyou.events.AuthEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 public class RegisterFragment extends Fragment {
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-         
-    }
+    private Button btnLogin, btnRegister, btnRecovery;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.frg_login, container, false);
+        View v = inflater.inflate(R.layout.frg_register, container, false);
+        initViews(v);
+        initButtons();
+        return v;
     }
+
+
+    private void initViews(View v) {
+        btnLogin    = v.findViewById(R.id.frg_register_login);
+        btnRegister = v.findViewById(R.id.frg_register_register);
+        btnRecovery = v.findViewById(R.id.frg_register_recovery);
+    }
+
+    private void initButtons() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AuthEvent event = new AuthEvent(AuthEvent.FrgType.LOGIN);
+                sendEvent(event);
+            }
+        });
+        btnRecovery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AuthEvent event = new AuthEvent(AuthEvent.FrgType.RECOVERY);
+                sendEvent(event);
+            }
+        });
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
+    private void sendEvent(AuthEvent event){
+        EventBus.getDefault().post(event);
+    }
+
 }

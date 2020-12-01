@@ -54,7 +54,7 @@
 
         <Button
             android:id="@+id/frg_register_login"
-            style="@style/BtnSecondary"
+            style="@style/BtnLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
