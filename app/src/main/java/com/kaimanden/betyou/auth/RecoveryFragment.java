@@ -7,13 +7,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.fragment.app.Fragment;
-
 import com.kaimanden.betyou.BaseFrg;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.events.AuthEvent;
-
-import org.greenrobot.eventbus.EventBus;
 
 
 public class RecoveryFragment extends BaseFrg {

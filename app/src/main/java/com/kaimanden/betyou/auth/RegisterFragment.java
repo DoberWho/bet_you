@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.fragment.app.Fragment;
-
 import com.google.firebase.auth.FirebaseUser;
 import com.kaimanden.betyou.BaseFrg;
 import com.kaimanden.betyou.tools.AuthController;
@@ -16,8 +14,6 @@ import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.ToastController;
 import com.kaimanden.betyou.tools.events.AuthEvent;
 import com.kaimanden.betyou.tools.listeners.AuthListener;
-
-import org.greenrobot.eventbus.EventBus;
 
 
 public class RegisterFragment extends BaseFrg {

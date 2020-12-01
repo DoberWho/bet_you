@@ -2,8 +2,6 @@ package com.kaimanden.betyou.auth;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +15,6 @@ import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.ToastController;
 import com.kaimanden.betyou.tools.events.AuthEvent;
 import com.kaimanden.betyou.tools.listeners.AuthListener;
-
-import org.greenrobot.eventbus.EventBus;
-
 
 public class LoginFragment extends BaseFrg {
 
