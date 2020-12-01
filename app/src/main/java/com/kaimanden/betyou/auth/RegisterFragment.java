@@ -30,9 +30,9 @@ public class RegisterFragment extends Fragment {
 
 
     private void initViews(View v) {
-        btnLogin    = v.findViewById(R.id.frg_register_login);
-        btnRegister = v.findViewById(R.id.frg_register_register);
-        btnRecovery = v.findViewById(R.id.frg_register_recovery);
+        btnLogin    = v.findViewById(R.id.frg_recovery_login);
+        btnRegister = v.findViewById(R.id.frg_recovery_register);
+        btnRecovery = v.findViewById(R.id.frg_recovery_recovery);
     }
 
     private void initButtons() {
@@ -46,14 +46,14 @@ public class RegisterFragment extends Fragment {
         btnRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AuthEvent event = new AuthEvent(AuthEvent.FrgType.RECOVERY);
-                sendEvent(event);
+
             }
         });
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AuthEvent event = new AuthEvent(AuthEvent.FrgType.REGISTER);
+                sendEvent(event);
             }
         });
     }

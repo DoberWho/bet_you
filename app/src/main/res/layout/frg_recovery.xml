@@ -8,7 +8,7 @@
     tools:context=".auth.AuthActivity">
 
     <EditText
-        android:id="@+id/frg_register_email"
+        android:id="@+id/frg_recovery_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -17,7 +17,7 @@
         android:inputType="textEmailAddress" />
 
     <Button
-        android:id="@+id/frg_register_recovery"
+        android:id="@+id/frg_recovery_recovery"
         style="@style/BtnAction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         android:weightSum="100">
 
         <Button
-            android:id="@+id/frg_register_register"
+            android:id="@+id/frg_recovery_register"
             style="@style/BtnLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             android:text="@string/btn_register" />
 
         <Button
-            android:id="@+id/frg_register_login"
+            android:id="@+id/frg_recovery_login"
             style="@style/BtnLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
