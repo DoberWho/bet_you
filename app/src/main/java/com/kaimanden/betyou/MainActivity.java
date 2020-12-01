@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.kaimanden.betyou.auth.AuthActivity;
-import com.kaimanden.betyou.models.User;
+import com.kaimanden.betyou.tools.models.User;
 import com.orhanobut.hawk.Hawk;
-
-import org.greenrobot.eventbus.EventBus;
 
 public class MainActivity extends BaseAct {
 

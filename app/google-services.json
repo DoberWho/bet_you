@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "961775687234",
+    "firebase_url": "https://betyou-5e963.firebaseio.com",
+    "project_id": "betyou-5e963",
+    "storage_bucket": "betyou-5e963.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961775687234:android:c9693f57018e7320ad7fdb",
+        "android_client_info": {
+          "package_name": "com.kaimanden.betyou"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961775687234-ijp3nt4t5kb5p2h42gq8nm3ur0e3f8st.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgnLlwO_p0PdQ5JpffVe4M1do_WLEdl_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961775687234-ijp3nt4t5kb5p2h42gq8nm3ur0e3f8st.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,4 @@
-package com.kaimanden.betyou.models;
-
-import com.google.gson.annotations.SerializedName;
+package com.kaimanden.betyou.tools.models;
 
 import java.io.Serializable;
 

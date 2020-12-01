@@ -1,4 +1,4 @@
-package com.kaimanden.betyou.events;
+package com.kaimanden.betyou.tools.events;
 
 public class AuthEvent {
 

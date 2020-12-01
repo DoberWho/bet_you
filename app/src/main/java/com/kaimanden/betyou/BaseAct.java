@@ -4,8 +4,9 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.kaimanden.betyou.events.AuthEvent;
-import com.kaimanden.betyou.events.BaseEvent;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.kaimanden.betyou.tools.events.BaseEvent;
 import com.kaimanden.betyou.tools.EmergencyHandler;
 
 import org.greenrobot.eventbus.EventBus;
@@ -15,6 +16,7 @@ import org.greenrobot.eventbus.ThreadMode;
 public class BaseAct extends AppCompatActivity {
 
     private static EmergencyHandler exHandler;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -25,12 +27,16 @@ public class BaseAct extends AppCompatActivity {
 
         if(Thread.getDefaultUncaughtExceptionHandler() != exHandler)
             Thread.setDefaultUncaughtExceptionHandler(exHandler);
+
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
     }
 
     @Override

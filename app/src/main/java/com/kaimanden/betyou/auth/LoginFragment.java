@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.kaimanden.betyou.R;
-import com.kaimanden.betyou.events.AuthEvent;
+import com.kaimanden.betyou.tools.events.AuthEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
