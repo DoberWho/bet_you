@@ -1,7 +1,6 @@
-package com.kaimanden.betyou;
+package com.kaimanden.betyou.tools;
 
 import android.app.Activity;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -11,7 +10,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.kaimanden.betyou.tools.listeners.AuthListener;
-import com.orhanobut.hawk.Hawk;
 
 public class AuthController {
     private FirebaseAuth mAuth;

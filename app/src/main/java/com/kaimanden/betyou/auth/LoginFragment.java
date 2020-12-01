@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseUser;
-import com.kaimanden.betyou.AuthController;
+import com.kaimanden.betyou.tools.AuthController;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.ToastController;
 import com.kaimanden.betyou.tools.events.AuthEvent;
