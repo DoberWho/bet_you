@@ -11,7 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.BetYou">
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="true" />
 
+
+        <activity
+            android:name=".user.UserActivity"
+            android:label="@string/title_activity_user"></activity>
         <activity
             android:name=".auth.AuthActivity"
             android:label="@string/title_activity_login" />

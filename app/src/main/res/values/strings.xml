@@ -25,4 +25,10 @@
     <string name="error_pass_equals">Contraseña Deben ser Iguales</string>
     <string name="error_form_data">No se ha podido completar</string>
     <string name="request_register_ko">Error en Registro, revise los datos</string>
+    <string name="title_activity_user">UserActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>
