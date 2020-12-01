@@ -24,4 +24,5 @@
     <string name="error_empty_data">Requerido</string>
     <string name="error_pass_equals">Contraseña Deben ser Iguales</string>
     <string name="error_form_data">No se ha podido completar</string>
+    <string name="request_register_ko">Error en Registro, revise los datos</string>
 </resources>

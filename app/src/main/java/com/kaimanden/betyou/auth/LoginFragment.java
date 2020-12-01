@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.kaimanden.betyou.BaseFrg;
 import com.kaimanden.betyou.tools.AuthController;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.ToastController;
@@ -20,7 +21,7 @@ import com.kaimanden.betyou.tools.listeners.AuthListener;
 import org.greenrobot.eventbus.EventBus;
 
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends BaseFrg {
 
     private Button btnLogin, btnRegister, btnRecovery;
     private EditText edtEmail,edtPass;
@@ -53,21 +54,15 @@ public class LoginFragment extends Fragment {
         btnRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AuthEvent event = new AuthEvent(AuthEvent.FrgType.RECOVERY);
-                sendEvent(event);
+                sendEvent(AuthEvent.FrgType.RECOVERY);
             }
         });
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AuthEvent event = new AuthEvent(AuthEvent.FrgType.REGISTER);
-                sendEvent(event);
+                sendEvent(AuthEvent.FrgType.REGISTER);
             }
         });
-    }
-
-    private void sendEvent(AuthEvent event){
-        EventBus.getDefault().post(event);
     }
 
     private void checkFormData() {
@@ -90,15 +85,12 @@ public class LoginFragment extends Fragment {
             public void isOk(FirebaseUser user) {
                 String msg = getString(R.string.request_login_ok);
                 ToastController.init(getView()).showInfo(msg);
-
-                AuthEvent event = new AuthEvent(AuthEvent.FrgType.LOGIN_OK);
-                sendEvent(event);
-
+                sendEvent(AuthEvent.FrgType.LOGIN_OK);
             }
 
             @Override
             public void isKo(String error) {
-                ToastController.init(getView()).showError(error);
+                showError(error);
             }
         });
     }

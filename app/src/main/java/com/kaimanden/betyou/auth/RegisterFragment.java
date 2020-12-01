@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.kaimanden.betyou.BaseFrg;
 import com.kaimanden.betyou.tools.AuthController;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.ToastController;
@@ -19,7 +20,7 @@ import com.kaimanden.betyou.tools.listeners.AuthListener;
 import org.greenrobot.eventbus.EventBus;
 
 
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends BaseFrg {
 
     private Button btnLogin, btnRegister, btnRecovery;
     private EditText edtEmail, edtPass, edtConfirm;
@@ -49,15 +50,13 @@ public class RegisterFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AuthEvent event = new AuthEvent(AuthEvent.FrgType.LOGIN);
-                sendEvent(event);
+                sendEvent(AuthEvent.FrgType.LOGIN);
             }
         });
         btnRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AuthEvent event = new AuthEvent(AuthEvent.FrgType.RECOVERY);
-                sendEvent(event);
+                sendEvent(AuthEvent.FrgType.RECOVERY);
             }
         });
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -69,37 +68,31 @@ public class RegisterFragment extends Fragment {
     }
 
     private void checkFormData() {
-        boolean isOk = true;
+
         String email = edtEmail.getText().toString();
         if (email.trim().isEmpty()){
             String error = getString(R.string.error_empty_data);
             ToastController.init(getView()).showError(error);
-            isOk = false;
+            return;
         }
 
         String pass = edtPass.getText().toString().trim();
         if (pass.isEmpty()){
             String error = getString(R.string.error_empty_data);
             edtPass.setError(error);
-            isOk = false;
+            return;
         }
 
         String passConfirm = edtConfirm.getText().toString().trim();
         if (passConfirm.isEmpty()){
             String error = getString(R.string.error_empty_data);
             edtConfirm.setError(error);
-            isOk = false;
-        }
-
-        if (!passConfirm.equals(pass)){
-            String errorShow = getString(R.string.error_pass_equals);
-            ToastController.init(getView()).showError(errorShow);
             return;
         }
 
-        if (!isOk){
-            String errorShow = getString(R.string.error_form_data);
-            ToastController.init(getView()).showError(errorShow);
+        if (!passConfirm.equals(pass)){
+            String error = getString(R.string.error_pass_equals);
+            edtConfirm.setError(error);
             return;
         }
 
@@ -107,22 +100,17 @@ public class RegisterFragment extends Fragment {
             @Override
             public void isOk(FirebaseUser user) {
                 String msg = getString(R.string.request_register_ok);
-                ToastController.init(getView()).showInfo(msg);
-                AuthEvent event = new AuthEvent(AuthEvent.FrgType.REGISTER_OK);
-                sendEvent(event);
+                showInfo(msg);
+                sendEvent(AuthEvent.FrgType.REGISTER_OK);
             }
 
             @Override
             public void isKo(String error) {
-                String msg = getString(R.string.request_register_ok);
-                ToastController.init(getView()).showError(error);
+                String msg = getString(R.string.request_register_ko);
+                showError(msg);
             }
         });
 
-    }
-
-    private void sendEvent(AuthEvent event){
-        EventBus.getDefault().post(event);
     }
 
 }
