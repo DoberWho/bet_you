@@ -16,7 +16,6 @@ import org.greenrobot.eventbus.ThreadMode;
 public class BaseAct extends AppCompatActivity {
 
     private static EmergencyHandler exHandler;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -34,7 +33,7 @@ public class BaseAct extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+
     }
 
     @Override

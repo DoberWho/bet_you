@@ -14,4 +14,8 @@
     <string name="btn_recovery">¿Te olvidaste?</string>
     <string name="pass_hint_confirm">Confirma tu Contraseña</string>
     <string name="btn_recovery_action">Recuperar</string>
+
+    <string name="error_empty_data">Requerido</string>
+    <string name="error_pass_equals">Contraseña Deben ser Iguales</string>
+    <string name="error_form_data">No se ha podido completar</string>
 </resources>
