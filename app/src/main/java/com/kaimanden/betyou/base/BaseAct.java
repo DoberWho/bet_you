@@ -27,6 +27,8 @@ public class BaseAct extends AppCompatActivity {
         super.onCreate(savedInstance);
         loadingCtrl = LoadingController.init(this);
 
+        getSupportActionBar().hide();
+
         if(exHandler == null) exHandler = new EmergencyHandler(this);
         else exHandler.setActivity(this);
 
