@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import com.kaimanden.betyou.tools.ToastController;
 import com.kaimanden.betyou.tools.events.AuthEvent;
+import com.kaimanden.betyou.tools.events.LoadingEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -22,5 +23,10 @@ public class BaseFrg extends Fragment {
 
     public void showInfo(String msg){
         ToastController.init(getView()).showInfo(msg);
+    }
+
+    public void showLoading(boolean show){
+        LoadingEvent event = new LoadingEvent(show);
+        EventBus.getDefault().post(event);
     }
 }

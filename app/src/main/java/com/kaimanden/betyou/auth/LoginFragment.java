@@ -80,7 +80,7 @@ public class LoginFragment extends BaseFrg {
         AuthController.init(getActivity()).login(email, pass, new AuthListener() {
             @Override
             public void isOk(FirebaseUser user) {
-                ((BaseAct)getActivity()).hideLoading();
+                showLoading(true);
                 String msg = getString(R.string.request_login_ok);
                 showInfo(msg);
                 sendEvent(AuthEvent.FrgType.LOGIN_OK);
@@ -88,6 +88,7 @@ public class LoginFragment extends BaseFrg {
 
             @Override
             public void isKo(String error) {
+                showLoading(false);
                 showError(error);
             }
         });
