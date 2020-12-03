@@ -32,4 +32,13 @@
     <string name="content_desc_menu_bet">Nueva Apuesta</string>
     <string name="content_desc_menu_money">Listado Apuestas</string>
     <string name="content_desc_menu_settings">Configuración</string>
+    <string name="settings_profile_title">Tus Datos</string>
+    <string name="settings_name_edt">Tu Nombre (Publico)</string>
+    <string name="settings_paypal_edt">Tu Paypal</string>
+    <string name="settings_notifications_label">Recibir Notificaciones</string>
+    <string name="save_btn">Guardar</string>
+    <string name="settings_password_title">Cambiar Contraseña</string>
+    <string name="error_not_loged">Debe estar Logeado</string>
+    <string name="error_not_valid_pass">Contraseña Incorrecta</string>
+    <string name="request_pass_changed">Contraseña Cambiada</string>
 </resources>
