@@ -26,6 +26,7 @@ public class LoadingController {
     }
 
     private void createDialog() {
+        if (act == null) return;
         builder = new AlertDialog.Builder(act);
         builder.setCancelable(false);
         View view = this.getView();

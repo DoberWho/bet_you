@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.kaimanden.betyou.base.BaseAct;
 import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.tools.AuthController;
 import com.kaimanden.betyou.R;
@@ -75,11 +76,13 @@ public class LoginFragment extends BaseFrg {
             return;
         }
 
+        ((BaseAct)getActivity()).showLoading();
         AuthController.init(getActivity()).login(email, pass, new AuthListener() {
             @Override
             public void isOk(FirebaseUser user) {
+                ((BaseAct)getActivity()).hideLoading();
                 String msg = getString(R.string.request_login_ok);
-                ToastController.init(getView()).showInfo(msg);
+                showInfo(msg);
                 sendEvent(AuthEvent.FrgType.LOGIN_OK);
             }
 
