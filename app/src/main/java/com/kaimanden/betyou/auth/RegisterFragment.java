@@ -97,11 +97,13 @@ public class RegisterFragment extends BaseFrg {
             public void isOk(FirebaseUser user) {
                 String msg = getString(R.string.request_register_ok);
                 showInfo(msg);
+                showLoading(true);
                 sendEvent(AuthEvent.FrgType.REGISTER_OK);
             }
 
             @Override
             public void isKo(String error) {
+                showLoading(false);
                 String msg = getString(R.string.request_register_ko);
                 showError(msg);
             }
