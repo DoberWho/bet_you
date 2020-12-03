@@ -92,12 +92,14 @@ public class RegisterFragment extends BaseFrg {
             return;
         }
 
+        showLoading(true);
+        hideKeyb();
         AuthController.init(getActivity()).register(email, pass, new AuthListener() {
             @Override
             public void isOk(FirebaseUser user) {
                 String msg = getString(R.string.request_register_ok);
                 showInfo(msg);
-                showLoading(true);
+                showLoading(false);
                 sendEvent(AuthEvent.FrgType.REGISTER_OK);
             }
 

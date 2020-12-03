@@ -76,6 +76,7 @@ public class LoginFragment extends BaseFrg {
             return;
         }
 
+        hideKeyb();
         ((BaseAct)getActivity()).showLoading();
         AuthController.init(getActivity()).login(email, pass, new AuthListener() {
             @Override
