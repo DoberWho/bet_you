@@ -1,8 +1,12 @@
 package com.kaimanden.betyou.base;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,6 +61,17 @@ public class BaseAct extends AppCompatActivity {
 
     public void hideLoading(){
         loadingCtrl.hide();
+    }
+
+    public void hideKeyb(){
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+        View view = getCurrentFocus();
+        if (view == null) {
+            view = new View(this);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
