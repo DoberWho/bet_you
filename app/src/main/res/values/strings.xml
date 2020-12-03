@@ -41,4 +41,5 @@
     <string name="error_not_loged">Debe estar Logeado</string>
     <string name="error_not_valid_pass">Contraseña Incorrecta</string>
     <string name="request_pass_changed">Contraseña Cambiada</string>
+    <string name="request_save_profile_ok">Perfil Guardado</string>
 </resources>

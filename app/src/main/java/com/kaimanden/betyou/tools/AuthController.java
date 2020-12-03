@@ -36,6 +36,10 @@ public class AuthController {
         currentUser = mAuth.getCurrentUser();
     }
 
+    public FirebaseAuth getAuth(){
+        return this.mAuth;
+    }
+
     public boolean isLoged(){
         return (currentUser != null);
     }

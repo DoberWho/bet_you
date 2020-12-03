@@ -12,7 +12,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.tools.AuthController;
+import com.kaimanden.betyou.tools.DbController;
 import com.kaimanden.betyou.tools.listeners.AuthListener;
+import com.kaimanden.betyou.tools.listeners.DbListener;
+import com.kaimanden.betyou.tools.models.UserProfile;
 
 public class SettingsFragment extends BaseFrg {
 
@@ -49,6 +52,41 @@ public class SettingsFragment extends BaseFrg {
             }
         });
 
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveProfile();
+            }
+        });
+
+    }
+
+    private void saveProfile() {
+        String name   = edtName.getText().toString().trim();
+        String paypal = edtPaypal.getText().toString().trim();
+        boolean showNotifs = swNotifs.isChecked();
+
+        UserProfile profile = new UserProfile();
+        profile.setName(name);
+        profile.setPaypal(paypal);
+        profile.setShowNotifs(showNotifs);
+
+        showLoading(true);
+        hideKeyb();
+        DbController.init(getActivity()).saveProfile(profile, new DbListener() {
+            @Override
+            public void isOk() {
+                String msg = getString(R.string.request_save_profile_ok);
+                showInfo(msg);
+                showLoading(false);
+            }
+
+            @Override
+            public void isKo(String error) {
+                showLoading(false);
+                showError(error);
+            }
+        });
     }
 
     private void changePassword() {
@@ -77,6 +115,7 @@ public class SettingsFragment extends BaseFrg {
         }
 
         showLoading(true);
+        hideKeyb();
         AuthController.init(getActivity()).changePass(oldPass, pass, new AuthListener() {
             @Override
             public void isOk(FirebaseUser user) {
