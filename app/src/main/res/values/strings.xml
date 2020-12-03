@@ -42,4 +42,5 @@
     <string name="error_not_valid_pass">Contraseña Incorrecta</string>
     <string name="request_pass_changed">Contraseña Cambiada</string>
     <string name="request_save_profile_ok">Perfil Guardado</string>
+    <string name="error_profile_not_exist">No existe el perfil</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.kaimanden.betyou.main;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +23,19 @@ public class SettingsFragment extends BaseFrg {
     private EditText edtName, edtPaypal, edtOldPass, edtPass, edtPassConfirm;
     private Switch swNotifs;
     private Button btnProfile, btnPass;
+    private DbController dbCtrl;
+    private UserProfile currentProfile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frg_settings, container, false);
         initViews(v);
+        dbCtrl = DbController.init(getActivity());
         initButtons();
+        getUserProfile();
         return v;
     }
-
 
     private void initViews(View v) {
         edtName = v.findViewById(R.id.frg_settings_name_edt);
@@ -73,9 +77,9 @@ public class SettingsFragment extends BaseFrg {
 
         showLoading(true);
         hideKeyb();
-        DbController.init(getActivity()).saveProfile(profile, new DbListener() {
+        dbCtrl.saveProfile(profile, new DbListener() {
             @Override
-            public void isOk() {
+            public void isOk(UserProfile profile) {
                 String msg = getString(R.string.request_save_profile_ok);
                 showInfo(msg);
                 showLoading(false);
@@ -130,5 +134,32 @@ public class SettingsFragment extends BaseFrg {
                 showError(error);
             }
         });
+    }
+
+    private void getUserProfile() {
+        showLoading(true);
+        dbCtrl.getUserProfile(new DbListener() {
+            @Override
+            public void isOk(UserProfile profile) {
+                showLoading(false);
+                currentProfile = profile;
+                updateProfile();
+            }
+
+            @Override
+            public void isKo(String error) {
+                showLoading(false);
+                Log.e("Settings", error);
+            }
+        });
+    }
+
+    private void updateProfile() {
+        if (currentProfile == null){
+            return;
+        }
+        edtName.setText(currentProfile.getName());
+        edtPaypal.setText(currentProfile.getPaypal());
+        swNotifs.setChecked(currentProfile.isShowNotifs());
     }
 }

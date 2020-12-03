@@ -4,19 +4,25 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.kaimanden.betyou.base.BaseAct;
+import com.google.firebase.firestore.SetOptions;
+import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.listeners.DbListener;
 import com.kaimanden.betyou.tools.models.UserProfile;
 
 import java.util.HashMap;
 
 public class DbController {
+
+    private static final String USERS_COLLECTION = "users";
 
     private FirebaseFirestore db;
     private Activity act;
@@ -42,14 +48,16 @@ public class DbController {
 
     public void saveProfile(UserProfile profile, DbListener listener){
         FirebaseUser user = mAuth.getCurrentUser();
+        String uid = user.getUid();
         HashMap map = profile.toMap();
-        map.put("id_user", user.getUid());
-        db.collection("users")
-                .add(map)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        map.put("uid", uid);
+        db.collection(USERS_COLLECTION)
+                .document(uid)
+                .set(map, SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        listener.isOk();
+                    public void onSuccess(Void aVoid) {
+                        listener.isOk(profile);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -62,5 +70,35 @@ public class DbController {
                         }
                     }
                 });
+    }
+
+    public void getUserProfile(DbListener listener){
+        FirebaseUser user = mAuth.getCurrentUser();
+        String uid = user.getUid();
+
+        DocumentReference docRef = db.collection(USERS_COLLECTION).document(uid);
+        Task<DocumentSnapshot> future = docRef.get();
+        future.addOnCompleteListener(act, new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        UserProfile obj = doc.toObject(UserProfile.class);
+                        listener.isOk(obj);
+                    }else{
+                        String error = act.getString(R.string.error_profile_not_exist);
+                        listener.isKo(error);
+                    }
+                }else{
+                    String error = act.getString(R.string.error_profile_not_exist);
+                    listener.isKo(error);
+                }
+            }
+        });
+    }
+
+    private void updateProfile(FirebaseUser user, UserProfile profile, DbListener listener){
+        //.collection("users").where("uid", "==", payload.uid)
     }
 }
