@@ -20,11 +20,12 @@ public class BaseAct extends AppCompatActivity {
     private static EmergencyHandler exHandler;
 
     private boolean active = false;
-    private LoadingController loadingCtrl = LoadingController.init(this);
+    private LoadingController loadingCtrl;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
+        loadingCtrl = LoadingController.init(this);
 
         if(exHandler == null) exHandler = new EmergencyHandler(this);
         else exHandler.setActivity(this);

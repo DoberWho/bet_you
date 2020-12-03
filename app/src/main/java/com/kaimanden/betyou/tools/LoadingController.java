@@ -21,7 +21,6 @@ public class LoadingController {
             instance = new LoadingController();
         }
         instance.act = act;
-        instance.createDialog();
         return instance;
     }
 
@@ -39,6 +38,7 @@ public class LoadingController {
     }
 
     public void show(){
+        createDialog();
         dialog = builder.create();
         dialog.show();
     }
