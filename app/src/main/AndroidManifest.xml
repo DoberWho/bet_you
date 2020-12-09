@@ -10,11 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.BetYou">
-
-
+        <activity android:name=".main.betcreate.BetCreateActivity"></activity>
         <activity
             android:name=".user.UserActivity"
-            android:label="@string/title_activity_user"></activity>
+            android:label="@string/title_activity_user" />
         <activity
             android:name=".auth.AuthActivity"
             android:label="@string/title_activity_login" />

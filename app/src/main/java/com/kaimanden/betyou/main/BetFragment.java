@@ -1,5 +1,6 @@
 package com.kaimanden.betyou.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.EditText;
 
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseFrg;
+import com.kaimanden.betyou.main.betcreate.BetCreateActivity;
+import com.kaimanden.betyou.models.BetItem;
 
 import java.util.Date;
 
@@ -39,5 +42,40 @@ public class BetFragment extends BaseFrg {
     private void initButtons() {
         Date minDate = new Date();
         calendar.setMinDate(minDate.getTime());
+
+
+        btnAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createBet();
+            }
+        });
+    }
+
+    private void createBet() {
+        String title = edtName.getText().toString().trim();
+        String desc  = edtDesc.getText().toString().trim();
+
+        if (title.isEmpty()){
+            String error = getString(R.string.error_empty_data);
+            edtName.setError(error);
+            return;
+        }
+        if (desc.isEmpty()){
+            String error = getString(R.string.error_empty_data);
+            edtDesc.setError(error);
+            return;
+        }
+
+        long betTime = calendar.getDate();
+
+        BetItem bet = new BetItem();
+        bet.setBetTime(betTime);
+        bet.setTitle(title);
+        bet.setDesc(desc);
+
+        Intent intent = new Intent(getActivity(), BetCreateActivity.class);
+        intent.putExtra(BetCreateActivity.BETITEM, bet);
+        startActivity(intent);
     }
 }

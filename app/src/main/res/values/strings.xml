@@ -46,5 +46,5 @@
     <string name="frg_bet_title">Nueva Apuesta</string>
     <string name="frg_bet_desc_hint">¿Que Apuestas?</string>
     <string name="frg_bet_name_hint">Titulo</string>
-    <string name="frg_bet_create_btn" >Crear Apuesta</string>
+    <string name="frg_bet_create_btn">Crear Apuesta</string>
 </resources>
