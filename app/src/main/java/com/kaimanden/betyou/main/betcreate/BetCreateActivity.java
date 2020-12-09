@@ -47,7 +47,13 @@ public class BetCreateActivity extends BaseAct {
 
     private void changeMoney(int increase) {
         String strMoney = edtMoney.getText().toString().trim();
+        if (strMoney.isEmpty()){
+            strMoney = "0";
+        }
         Integer value = Integer.valueOf(strMoney);
+        if (value == null) {
+            value = 0;
+        }
         value +=increase;
 
         Integer minValue = getResources().getInteger(R.integer.min_value);
