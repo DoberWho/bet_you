@@ -50,4 +50,5 @@
     <string name="frg_bet_create_title">¿Cuanto Apuestas?</string>
 
     <string name="bet_create_money_hint">El valor será considerado en Euro (€)</string>
+    <string name="bet_create_who_title">¿Con Quien?</string>
 </resources>

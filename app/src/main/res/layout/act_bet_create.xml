@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -54,10 +55,11 @@
                 android:layout_weight="50"
                 android:defaultFocusHighlightEnabled="false"
                 android:ems="10"
-                android:focusable="auto"
-                android:focusableInTouchMode="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:focusedByDefault="false"
                 android:gravity="center"
+                android:hint="@string/default_bet_value"
                 android:inputType="number"
                 android:singleLine="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -81,5 +83,16 @@
             android:text="@string/bet_create_money_hint"
             android:textSize="10sp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/bet_create_who_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
