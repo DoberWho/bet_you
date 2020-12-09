@@ -6,4 +6,80 @@
     android:layout_height="match_parent"
     tools:context=".main.betcreate.BetCreateActivity">
 
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/frg_bet_create_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:orientation="vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:weightSum="100">
+
+            <ImageButton
+                android:id="@+id/act_bet_create_minus"
+                style="@style/BtnLink"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:src="@drawable/ic_minus"
+                android:textSize="32sp" />
+
+            <EditText
+                android:id="@+id/act_bet_create_money"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="50"
+                android:defaultFocusHighlightEnabled="false"
+                android:ems="10"
+                android:focusable="auto"
+                android:focusableInTouchMode="true"
+                android:focusedByDefault="false"
+                android:gravity="center"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                tools:text="@string/default_bet_value" />
+
+            <ImageButton
+                android:id="@+id/act_bet_create_plus"
+                style="@style/BtnLink"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:src="@drawable/ic_plus"
+                android:textSize="32sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/bet_create_money_hint"
+            android:textSize="10sp" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
