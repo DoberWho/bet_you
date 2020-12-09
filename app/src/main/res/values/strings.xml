@@ -43,4 +43,8 @@
     <string name="request_pass_changed">Contraseña Cambiada</string>
     <string name="request_save_profile_ok">Perfil Guardado</string>
     <string name="error_profile_not_exist">No existe el perfil</string>
+    <string name="frg_bet_title">Nueva Apuesta</string>
+    <string name="frg_bet_desc_hint">¿Que Apuestas?</string>
+    <string name="frg_bet_name_hint">Titulo</string>
+    <string name="frg_bet_create_btn" >Crear Apuesta</string>
 </resources>
