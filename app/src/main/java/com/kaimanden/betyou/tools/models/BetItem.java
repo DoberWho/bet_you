@@ -1,8 +1,12 @@
 package com.kaimanden.betyou.tools.models;
 
-import java.io.Serializable;
+import com.kaimanden.betyou.tools.interfaces.DbObject;
 
-public class BetItem implements Serializable {
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+public class BetItem implements Serializable, DbObject {
 
     private String title = "";
     private String desc = "";
@@ -30,5 +34,17 @@ public class BetItem implements Serializable {
 
     public void setBetTime(long betTime) {
         this.betTime = betTime;
+    }
+
+
+    @Override
+    public Map toMap() {
+        HashMap map = new HashMap();
+
+        map.put("title", this.title);
+        map.put("desc", this.desc);
+        map.put("betTime", this.betTime);
+
+        return map;
     }
 }

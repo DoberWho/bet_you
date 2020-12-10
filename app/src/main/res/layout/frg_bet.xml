@@ -44,9 +44,9 @@
             android:gravity="start|top"
             android:hint="@string/frg_bet_desc_hint"
             android:inputType="textMultiLine"
-            android:lines="4"
-            android:maxLines="6"
-            android:minLines="4" />
+            android:lines="2"
+            android:maxLines="2"
+            android:minLines="2" />
 
         <CalendarView
             android:id="@+id/frg_bet_calendar"

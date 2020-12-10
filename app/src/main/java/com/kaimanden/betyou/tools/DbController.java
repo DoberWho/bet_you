@@ -17,16 +17,20 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.listeners.DbListener;
+import com.kaimanden.betyou.tools.models.BetItem;
 import com.kaimanden.betyou.tools.models.UserProfile;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class DbController {
 
     private static final String USERS_COLLECTION = "users";
+    private static final String BET_COLLECTION = "bets";
 
     private FirebaseFirestore db;
     private Activity act;
@@ -53,7 +57,7 @@ public class DbController {
     public void saveProfile(UserProfile profile, DbListener listener){
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
-        HashMap map = profile.toMap();
+        Map map = profile.toMap();
         map.put("uid", uid);
         db.collection(USERS_COLLECTION)
                 .document(uid)
@@ -118,5 +122,41 @@ public class DbController {
 
     private void updateProfile(FirebaseUser user, UserProfile profile, DbListener listener){
         //.collection("users").where("uid", "==", payload.uid)
+    }
+
+    public void saveBetItem(BetItem bet) {
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        String uid = user.getUid();
+        Map map = bet.toMap();
+        map.put("uid", uid);
+        db.collection(BET_COLLECTION)
+                .add(map)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference docRef) {
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception ex) {
+                        ex.printStackTrace();
+                        String error = ex.getLocalizedMessage();
+
+                    }
+                });
+    }
+
+    public void getUserBetItems (){
+        FirebaseUser user = mAuth.getCurrentUser();
+        String uid = user.getUid();
+
+        db.collection(BET_COLLECTION).whereArrayContains("uid", uid).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable  QuerySnapshot value, @Nullable  FirebaseFirestoreException error) {
+
+            }
+        });
     }
 }

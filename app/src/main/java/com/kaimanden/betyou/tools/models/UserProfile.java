@@ -1,8 +1,11 @@
 package com.kaimanden.betyou.tools.models;
 
-import java.util.HashMap;
+import com.kaimanden.betyou.tools.interfaces.DbObject;
 
-public class UserProfile {
+import java.util.HashMap;
+import java.util.Map;
+
+public class UserProfile implements DbObject {
     private String name = "";
     private String paypal = "";
     private boolean showNotifs = true;
@@ -31,7 +34,8 @@ public class UserProfile {
         this.showNotifs = showNotifs;
     }
 
-    public HashMap toMap(){
+    @Override
+    public Map toMap() {
         HashMap map = new HashMap();
 
         map.put("name", this.name);

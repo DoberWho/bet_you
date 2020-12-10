@@ -9,9 +9,12 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.main.betcreate.BetCreateActivity;
+import com.kaimanden.betyou.tools.DbController;
 import com.kaimanden.betyou.tools.models.BetItem;
 
 import java.util.Date;
@@ -43,7 +46,6 @@ public class BetFragment extends BaseFrg {
         Date minDate = new Date();
         calendar.setMinDate(minDate.getTime());
 
-
         btnAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,8 +76,13 @@ public class BetFragment extends BaseFrg {
         bet.setTitle(title);
         bet.setDesc(desc);
 
+        DbController.init(getActivity()).saveBetItem(bet);
+
+        /**
         Intent intent = new Intent(getActivity(), BetCreateActivity.class);
         intent.putExtra(BetCreateActivity.BETITEM, bet);
         startActivity(intent);
+
+         //*/
     }
 }
