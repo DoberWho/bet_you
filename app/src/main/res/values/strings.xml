@@ -10,6 +10,7 @@
     <string name="btn_register">Register</string>
     <string name="email_hint">Tu Email</string>
     <string name="pass_hint">Tu Contraseña</string>
+    <string name="new_pass_hint">Tu nueva Contraseña</string>
     <string name="btn_recovery">¿Te olvidaste?</string>
     <string name="pass_hint_confirm">Confirma tu Contraseña</string>
     <string name="btn_recovery_action">Recuperar</string>
@@ -37,6 +38,7 @@
     <string name="settings_paypal_edt">Tu Paypal</string>
     <string name="settings_notifications_label">Recibir Notificaciones</string>
     <string name="save_btn">Guardar</string>
+    <string name="pass_change_btn">Cambiar Contraseña</string>
     <string name="settings_password_title">Cambiar Contraseña</string>
     <string name="error_not_loged">Debe estar Logeado</string>
     <string name="error_not_valid_pass">Contraseña Incorrecta</string>
