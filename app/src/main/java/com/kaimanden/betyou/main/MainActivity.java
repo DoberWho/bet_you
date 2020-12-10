@@ -48,6 +48,7 @@ public class MainActivity extends BaseAct {
         btnNewBet   = findViewById(R.id.act_main_menu_bet);
         btnSettings = findViewById(R.id.act_main_menu_settings);
         btnListBet  = findViewById(R.id.act_main_menu_money);
+
     }
 
     private void initButtons() {

@@ -80,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:ems="10"
+            android:hint="@string/pass_hint"
             android:inputType="textPassword" />
 
 
@@ -89,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:ems="10"
+            android:hint="@string/new_pass_hint"
             android:inputType="textPassword" />
 
         <EditText
@@ -97,6 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:ems="10"
+            android:hint="@string/pass_hint_confirm"
             android:imeOptions="actionDone"
             android:inputType="textPassword" />
 
@@ -106,6 +109,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Button" />
+            android:text="@string/pass_change_btn" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
