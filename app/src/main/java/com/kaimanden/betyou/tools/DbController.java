@@ -2,7 +2,9 @@ package com.kaimanden.betyou.tools;
 
 import android.app.Activity;
 
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -12,7 +14,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.listeners.DbListener;
@@ -93,6 +97,20 @@ public class DbController {
                 }else{
                     String error = act.getString(R.string.error_profile_not_exist);
                     listener.isKo(error);
+                }
+            }
+        });
+
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.exists()) {
+                    UserProfile obj = value.toObject(UserProfile.class);
+                    listener.isOk(obj);
+                }else{
+                    String err = act.getString(R.string.error_profile_not_exist);
+                    listener.isKo(err);
                 }
             }
         });
