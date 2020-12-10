@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.kaimanden.betyou.tools.LoadingController;
+import com.kaimanden.betyou.tools.ToastController;
 import com.kaimanden.betyou.tools.events.BaseEvent;
 import com.kaimanden.betyou.tools.EmergencyHandler;
 import com.kaimanden.betyou.tools.events.LoadingEvent;
@@ -61,6 +62,14 @@ public class BaseAct extends AppCompatActivity {
 
     public void hideLoading(){
         loadingCtrl.hide();
+    }
+
+    public void showError(String msg){
+        ToastController.init(getCurrentFocus()).showError(msg);
+    }
+
+    public void showInfo(String msg){
+        ToastController.init(getCurrentFocus()).showInfo(msg);
     }
 
     public void hideKeyb(){

@@ -51,4 +51,6 @@
 
     <string name="bet_create_money_hint">El valor será considerado en Euro (€)</string>
     <string name="bet_create_who_title">¿Con Quien?</string>
+    <string name="error_permision_not_granted">Son necesarios permisos para continuar</string>
+    <string name="error_cursor_data_null">No se han recuperado los datos</string>
 </resources>

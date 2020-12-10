@@ -12,7 +12,7 @@ import android.widget.EditText;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.main.betcreate.BetCreateActivity;
-import com.kaimanden.betyou.models.BetItem;
+import com.kaimanden.betyou.tools.models.BetItem;
 
 import java.util.Date;
 

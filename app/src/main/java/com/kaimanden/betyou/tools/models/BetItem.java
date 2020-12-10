@@ -1,4 +1,4 @@
-package com.kaimanden.betyou.models;
+package com.kaimanden.betyou.tools.models;
 
 import java.io.Serializable;
 
