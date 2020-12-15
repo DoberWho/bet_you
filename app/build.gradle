@@ -43,4 +43,5 @@ dependencies {
 
     implementation "com.orhanobut:hawk:2.0.1"
     implementation 'org.greenrobot:eventbus:3.2.0'
+    implementation 'com.tomash:androidcontacts:1.14.0'
 }

@@ -12,16 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.models.Contact;
+import com.tomash.androidcontacts.contactgetter.entity.ContactData;
+import com.tomash.androidcontacts.contactgetter.entity.Email;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContactAdapter  extends RecyclerView.Adapter<ContactAdapter.ContactoHolder> {
 
     private static final int layout = R.layout.adapter_contact_item;
     private final Activity act;
-    private List<Contact> items;
+    private List<ContactData> items;
+    private List<ContactData> selected = new ArrayList<>();
 
-    public ContactAdapter(Activity act, List<Contact> items) {
+    public ContactAdapter(Activity act, List<ContactData> items) {
         this.act = act;
         this.items = items;
     }
@@ -36,14 +40,23 @@ public class ContactAdapter  extends RecyclerView.Adapter<ContactAdapter.Contact
 
     @Override
     public void onBindViewHolder(@NonNull ContactoHolder holder, int position) {
-        final Contact item = items.get(position);
+        final ContactData item = items.get(position);
 
-        String name = item.getName();
-        holder.txtName.setText(name);
+        //String name = item.getNickName();
+        holder.txtName.setText("NAME");
 
-        String email = item.getName();
-        holder.txtEmail.setText(email);
+        //Email email = item.getEmailList().get(0);
+        holder.txtEmail.setText("EMAIL");
 
+
+        holder.linRoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleContact(holder, item);
+            }
+        });
+
+        checkSelected(holder, item);
     }
 
     @Override
@@ -62,4 +75,28 @@ public class ContactAdapter  extends RecyclerView.Adapter<ContactAdapter.Contact
             linRoot = v.findViewById(R.id.adapter_contact_item_root);
         }
     }
+
+
+    private void toggleContact(ContactoHolder holder, ContactData item) {
+
+        if (this.selected.contains(item)){
+            this.selected.remove(item);
+        }else{
+            this.selected.add(item);
+        }
+        checkSelected(holder, item);
+    }
+
+    private void checkSelected(ContactoHolder holder, ContactData item) {
+
+        boolean checked = false;
+        if (this.selected.contains(item)){
+            checked = true;
+        }
+
+        holder.linRoot.setSelected(checked);
+        holder.txtName.setSelected(checked);
+        holder.txtEmail.setSelected(checked);
+    }
+
 }

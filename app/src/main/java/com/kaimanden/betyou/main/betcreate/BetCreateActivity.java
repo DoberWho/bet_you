@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,20 +22,18 @@ import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseAct;
 import com.kaimanden.betyou.tools.adapters.ContactAdapter;
 import com.kaimanden.betyou.tools.models.Contact;
+import com.tomash.androidcontacts.contactgetter.entity.ContactData;
+import com.tomash.androidcontacts.contactgetter.main.contactsGetter.ContactsGetterBuilder;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class BetCreateActivity extends BaseAct {
 
-    ArrayList<Contact> contactList = new ArrayList<>();
+    List<ContactData> contactList = new ArrayList<>();
     private static final int MY_PERMISSIONS_REQUEST_CODE = 12345;
-    private static final String[] PROJECTION = new String[]{
-            ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
-            ContactsContract.Contacts.DISPLAY_NAME,
-            ContactsContract.CommonDataKinds.Phone.NUMBER,
-            ContactsContract.CommonDataKinds.Email.DATA
-    };
 
     public static final String BETITEM = "bet item to create";
 
@@ -99,45 +98,23 @@ public class BetCreateActivity extends BaseAct {
     }
 
     private void getContactList() {
-        ContentResolver cr = getContentResolver();
+        List<ContactData> contactos = new ContactsGetterBuilder(this)
+                .allFields()
+                .buildList();
 
-        Cursor cursor = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, PROJECTION, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
-        if (cursor == null) {
-            String msg = getString(R.string.error_cursor_data_null);
-            showError(msg);
-            return;
-        }
-
-        String msg = "Contactos Encontrados:"+cursor.getCount();
-        showInfo(msg);
-
-        HashSet<String> mobileNoSet = new HashSet<String>();
-        try {
-            final int nameIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-            final int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-            final int emailIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA);
-
-            String name, number, email;
-            while (cursor.moveToNext()) {
-                name = cursor.getString(nameIndex);
-                number = cursor.getString(numberIndex);
-                number = number.replace(" ", "");
-                email = cursor.getString(emailIndex);
-
-                if (!mobileNoSet.contains(number)) {
-                    contactList.add(new Contact(name, number, email));
-                    mobileNoSet.add(number);
-                }
+        List<ContactData> res = new ArrayList<>();
+        for(ContactData contactData : contactos){
+            if (!contactData.getEmailList().isEmpty()){
+                res.add(contactData);
             }
-        } finally {
-            cursor.close();
-            updateContactsData();
         }
+        //contactList = res;
+        updateContactsData();
     }
 
     private void updateContactsData() {
 
-        showInfo("Creando Adapter: "+contactList.size());
+        showInfo(content,"Creando Adapter: "+contactList.size());
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         content.setLayoutManager(manager);
@@ -146,25 +123,26 @@ public class BetCreateActivity extends BaseAct {
 
     }
 
-
     private void checkPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CONTACTS) || ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_CONTACTS)) {
 
-                String msg = getString(R.string.error_permision_not_granted);
-                showError(msg);
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS},
-                        MY_PERMISSIONS_REQUEST_CODE);
+        int granted = PackageManager.PERMISSION_GRANTED;
+        String read = Manifest.permission.READ_CONTACTS;
+        String write = Manifest.permission.WRITE_CONTACTS;
+
+        boolean checkR = ( ContextCompat.checkSelfPermission(this, read) == granted );
+        boolean checkW = ( ContextCompat.checkSelfPermission(this, write) == granted );
+
+        if (!checkR){
+            boolean checkDR = ActivityCompat.shouldShowRequestPermissionRationale(this, read);
+            if (!checkDR){
+                ActivityCompat.requestPermissions(this, new String[]{read}, MY_PERMISSIONS_REQUEST_CODE);
+                return;
             }
-        } else {
-            // Permission has already been granted
-            getContactList();
         }
+
+        // Permission has already been granted
+        getContactList();
+
     }
 
 }

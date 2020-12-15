@@ -15,11 +15,13 @@ import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.main.betcreate.BetCreateActivity;
 import com.kaimanden.betyou.tools.DbController;
+import com.kaimanden.betyou.tools.listeners.DbListener;
 import com.kaimanden.betyou.tools.models.BetItem;
+import com.kaimanden.betyou.tools.models.UserProfile;
 
 import java.util.Date;
 
-public class BetFragment extends BaseFrg {
+public class BetFragment extends BaseFrg{
 
     private EditText edtName, edtDesc;
     private CalendarView calendar;
@@ -76,13 +78,11 @@ public class BetFragment extends BaseFrg {
         bet.setTitle(title);
         bet.setDesc(desc);
 
-        DbController.init(getActivity()).saveBetItem(bet);
+        //DbController.init(getActivity()).saveBetItem(bet);
 
-        /**
+
         Intent intent = new Intent(getActivity(), BetCreateActivity.class);
         intent.putExtra(BetCreateActivity.BETITEM, bet);
         startActivity(intent);
-
-         //*/
     }
 }

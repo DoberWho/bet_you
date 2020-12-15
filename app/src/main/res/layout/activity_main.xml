@@ -35,8 +35,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
             android:contentDescription="@string/content_desc_menu_home"
-            app:srcCompat="@drawable/ic_home" />
+         app:srcCompat="@drawable/ic_home" />
 
         <ImageButton
             android:id="@+id/act_main_menu_money"
@@ -44,6 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
             android:contentDescription="@string/content_desc_menu_money"
             app:srcCompat="@drawable/ic_money" />
 
@@ -54,8 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@string/content_desc_menu_bet"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
             app:srcCompat="@drawable/ic_new_bet" />
 
         <ImageButton
@@ -64,6 +68,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
             android:contentDescription="@string/content_desc_menu_calendar"
             app:srcCompat="@drawable/ic_calendar" />
 
@@ -73,6 +79,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
             android:contentDescription="@string/content_desc_menu_settings"
             app:srcCompat="@drawable/ic_settings" />
     </LinearLayout>

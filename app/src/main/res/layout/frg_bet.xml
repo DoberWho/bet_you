@@ -51,7 +51,8 @@
         <CalendarView
             android:id="@+id/frg_bet_calendar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:scaleX="1" />
 
         <Button
             android:id="@+id/frg_bet_action_btn"

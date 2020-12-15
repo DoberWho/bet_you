@@ -17,6 +17,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.kaimanden.betyou.R;
@@ -152,7 +153,17 @@ public class DbController {
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
 
-        db.collection(BET_COLLECTION).whereArrayContains("uid", uid).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        Query query1 = db.collection(BET_COLLECTION).whereEqualTo("uid", uid);
+        Query query2 = db.collection(BET_COLLECTION).whereArrayContains("users", uid);
+
+        query1.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable  QuerySnapshot value, @Nullable  FirebaseFirestoreException error) {
+
+            }
+        });
+
+        query2.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable  QuerySnapshot value, @Nullable  FirebaseFirestoreException error) {
 

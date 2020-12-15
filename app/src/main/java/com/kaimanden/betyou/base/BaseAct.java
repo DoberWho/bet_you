@@ -64,12 +64,12 @@ public class BaseAct extends AppCompatActivity {
         loadingCtrl.hide();
     }
 
-    public void showError(String msg){
-        ToastController.init(getCurrentFocus()).showError(msg);
+    public void showError(View v, String msg){
+        ToastController.init(v).showError(msg);
     }
 
-    public void showInfo(String msg){
-        ToastController.init(getCurrentFocus()).showInfo(msg);
+    public void showInfo(View v, String msg){
+        ToastController.init(v).showInfo(msg);
     }
 
     public void hideKeyb(){
