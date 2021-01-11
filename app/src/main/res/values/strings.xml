@@ -24,6 +24,7 @@
     <string name="error_empty_data">Requerido</string>
     <string name="error_pass_equals">Contraseña Deben ser Iguales</string>
     <string name="error_form_data">No se ha podido completar</string>
+    <string name="error_empty_list_required">Necesitamos algún contacto</string>
     <string name="request_register_ko">Error en Registro, revise los datos</string>
     <string name="title_activity_user">UserActivity</string>
 
@@ -55,4 +56,6 @@
     <string name="bet_create_who_title">¿Con Quien?</string>
     <string name="error_permision_not_granted">Son necesarios permisos para continuar</string>
     <string name="error_cursor_data_null">No se han recuperado los datos</string>
+    <string name="act_bet_create_filter_placeholder">Buscar...</string>
+    <string name="act_bet_create_btn_label">Apostar</string>
 </resources>

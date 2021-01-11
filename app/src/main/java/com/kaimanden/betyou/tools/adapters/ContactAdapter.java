@@ -112,6 +112,10 @@ public class ContactAdapter  extends RecyclerView.Adapter<ContactAdapter.Contact
             this.selected.add(item);
         }
         checkSelected(holder, item);
+
+        if (this.listener != null){
+            this.listener.selected(this.selected);
+        }
     }
 
     private void checkSelected(ContactoHolder holder, ContactData item) {
@@ -125,9 +129,6 @@ public class ContactAdapter  extends RecyclerView.Adapter<ContactAdapter.Contact
         holder.txtName.setSelected(checked);
         holder.txtEmail.setSelected(checked);
 
-        if (this.listener != null){
-            this.listener.selected(this.selected);
-        }
     }
 
 }

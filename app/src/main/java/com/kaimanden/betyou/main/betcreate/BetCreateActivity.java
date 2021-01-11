@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -33,12 +34,14 @@ import java.util.stream.Stream;
 
 public class BetCreateActivity extends BaseAct {
 
-    List<ContactData> contactList = new ArrayList<>();
+    private List<ContactData> contactList = new ArrayList<>();
+    private List<ContactData> selected = new ArrayList<>();
     private static final int MY_PERMISSIONS_REQUEST_CODE = 12345;
 
     public static final String BETITEM = "bet item to create";
 
     private ImageButton btnMinus, btnPlus;
+    private Button btnOk;
     private EditText edtMoney;
     private RecyclerView content;
 
@@ -57,6 +60,7 @@ public class BetCreateActivity extends BaseAct {
         btnPlus  = findViewById(R.id.act_bet_create_plus);
         edtMoney = findViewById(R.id.act_bet_create_money);
         content  = findViewById(R.id.act_bet_content);
+        btnOk    = findViewById(R.id.act_bet_create_btn);
     }
 
     private void initButtons() {
@@ -70,6 +74,13 @@ public class BetCreateActivity extends BaseAct {
             @Override
             public void onClick(View v) {
                 changeMoney(1);
+            }
+        });
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkCreateBet();
             }
         });
     }
@@ -98,31 +109,6 @@ public class BetCreateActivity extends BaseAct {
 
     }
 
-    private void getContactList() {
-        contactList = new ContactsGetterBuilder(this)
-                .allFields()
-                .buildList();
-        updateContactsData();
-    }
-
-    private void updateContactsData() {
-        ContactSelected listener = new ContactSelected() {
-            @Override
-            public void selected(List<ContactData> contactSelected) {
-                if (contactSelected == null || contactSelected.isEmpty()){
-                    return;
-                }
-                showInfo(content, "Seleccionados:"+contactSelected.size());
-            }
-        };
-
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        content.setLayoutManager(manager);
-        ContactAdapter adapter = new ContactAdapter(this, contactList, listener);
-        content.setAdapter(adapter);
-
-    }
-
     private void checkPermission() {
 
         int granted = PackageManager.PERMISSION_GRANTED;
@@ -143,6 +129,39 @@ public class BetCreateActivity extends BaseAct {
         // Permission has already been granted
         getContactList();
 
+    }
+
+    private void getContactList() {
+        contactList = new ContactsGetterBuilder(this)
+                .allFields()
+                .buildList();
+        updateContactsData();
+    }
+
+    private void updateContactsData() {
+        ContactSelected listener = new ContactSelected() {
+            @Override
+            public void selected(List<ContactData> contactSelected) {
+                if (contactSelected == null || contactSelected.isEmpty()){
+                    return;
+                }
+                showInfo(content, "Seleccionados:"+contactSelected.size());
+                selected = contactSelected;
+            }
+        };
+
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        content.setLayoutManager(manager);
+        ContactAdapter adapter = new ContactAdapter(this, contactList, listener);
+        content.setAdapter(adapter);
+
+    }
+
+    private void checkCreateBet() {
+        if (this.selected == null || this.selected.isEmpty()){
+            showError(content, getString(R.string.error_empty_list_required));
+            return;
+        }
     }
 
 }
