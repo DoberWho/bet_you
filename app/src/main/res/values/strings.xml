@@ -59,4 +59,5 @@
     <string name="act_bet_create_filter_placeholder">Buscar...</string>
     <string name="act_bet_create_btn_label">Apostar</string>
     <string name="save_betitem_ok">Apuesta Creada</string>
+    <string name="default_bet_price">100</string>
 </resources>

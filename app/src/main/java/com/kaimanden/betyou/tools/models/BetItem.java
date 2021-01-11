@@ -2,8 +2,10 @@ package com.kaimanden.betyou.tools.models;
 
 import com.kaimanden.betyou.tools.interfaces.DbObject;
 import com.tomash.androidcontacts.contactgetter.entity.ContactData;
+import com.tomash.androidcontacts.contactgetter.entity.Email;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,8 +50,14 @@ public class BetItem implements Serializable, DbObject {
         map.put("title", this.title);
         map.put("desc", this.desc);
         map.put("betTime", this.betTime);
-        map.put("contacts", this.selected);
         map.put("price", this.price);
+
+        List<String> contacts = new ArrayList<>();
+        for (ContactData contact: this.selected) {
+            Email email = contact.getEmailList().get(0);
+            contacts.add(email.getMainData());
+        }
+        map.put("contacts", contacts);
 
         return map;
     }

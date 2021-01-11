@@ -6,11 +6,16 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -28,6 +33,7 @@ import com.kaimanden.betyou.tools.interfaces.DbSaveListener;
 import com.kaimanden.betyou.tools.models.BetItem;
 import com.kaimanden.betyou.tools.models.Contact;
 import com.tomash.androidcontacts.contactgetter.entity.ContactData;
+import com.tomash.androidcontacts.contactgetter.entity.Email;
 import com.tomash.androidcontacts.contactgetter.main.contactsGetter.ContactsGetterBuilder;
 
 import java.util.ArrayList;
@@ -37,6 +43,7 @@ import java.util.stream.Stream;
 
 public class BetCreateActivity extends BaseAct {
 
+    private List<ContactData> filteredContacts = new ArrayList<>();
     private List<ContactData> contactList = new ArrayList<>();
     private List<ContactData> selected = new ArrayList<>();
     private static final int MY_PERMISSIONS_REQUEST_CODE = 12345;
@@ -45,7 +52,7 @@ public class BetCreateActivity extends BaseAct {
 
     private ImageButton btnMinus, btnPlus;
     private Button btnOk;
-    private EditText edtMoney;
+    private EditText edtMoney, edtFilter;
     private RecyclerView content;
     private BetItem betItem;
 
@@ -72,8 +79,82 @@ public class BetCreateActivity extends BaseAct {
         btnMinus = findViewById(R.id.act_bet_create_minus);
         btnPlus  = findViewById(R.id.act_bet_create_plus);
         edtMoney = findViewById(R.id.act_bet_create_money);
+        edtFilter = findViewById(R.id.act_bet_create_filter_edt);
         content  = findViewById(R.id.act_bet_content);
         btnOk    = findViewById(R.id.act_bet_create_btn);
+
+        edtMoney.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                boolean action = false;
+                if (actionId == EditorInfo.IME_ACTION_NONE) {
+                    hideKeyb();
+                    action = true;
+                }
+                return action;
+            }
+        });
+
+        edtFilter.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                boolean action = false;
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    hideKeyb();
+                    action = true;
+                }
+                return action;
+            }
+        });
+
+        edtFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String term = s.toString();
+                filterContacts(term);
+                updateContactsData();
+            }
+        });
+    }
+
+    private void filterContacts(String term) {
+        if (term == null || term.trim().isEmpty()){
+            this.filteredContacts = this.contactList;
+            return;
+        }
+
+        List<ContactData> filtered = new ArrayList<>();
+
+        for(ContactData contact : this.contactList){
+            String name = contact.getNameData().getFullName();
+            if (name.contains(term)){
+                filtered.add(contact);
+                continue;
+            }
+            List<Email> emails = contact.getEmailList();
+            if (emails.isEmpty()) continue;
+            Email email = emails.get(0);
+            if (email == null) continue;
+            String strEmail = email.getMainData();
+            if(strEmail.contains(term)){
+                filtered.add(contact);
+                continue;
+            }
+        }
+
+        this.filteredContacts = filtered;
     }
 
     private void initButtons() {
@@ -148,6 +229,8 @@ public class BetCreateActivity extends BaseAct {
         contactList = new ContactsGetterBuilder(this)
                 .allFields()
                 .buildList();
+
+        filterContacts(null);
         updateContactsData();
     }
 
@@ -156,6 +239,7 @@ public class BetCreateActivity extends BaseAct {
             @Override
             public void selected(List<ContactData> contactSelected) {
                 if (contactSelected == null || contactSelected.isEmpty()){
+                    showError(content, getString(R.string.error_empty_list_required));
                     return;
                 }
                 selected = contactSelected;
@@ -164,7 +248,7 @@ public class BetCreateActivity extends BaseAct {
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         content.setLayoutManager(manager);
-        ContactAdapter adapter = new ContactAdapter(this, contactList, listener);
+        ContactAdapter adapter = new ContactAdapter(this, filteredContacts, listener);
         content.setAdapter(adapter);
 
     }
@@ -176,7 +260,12 @@ public class BetCreateActivity extends BaseAct {
         }
 
         this.betItem.setSelected(this.selected);
-        this.betItem.setPrice(this.edtMoney.getText().toString());
+
+        String price = this.edtMoney.getText().toString();
+        if (price == null || price.trim().isEmpty()){
+            price = getString(R.string.default_bet_price);
+        }
+        this.betItem.setPrice(price);
         DbController.init(this).saveBetItem(this.betItem, new DbSaveListener() {
             @Override
             public void saveOk() {

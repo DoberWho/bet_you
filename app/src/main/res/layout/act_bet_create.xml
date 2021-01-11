@@ -57,6 +57,7 @@
                 android:ems="10"
                 android:gravity="center"
                 android:hint="@string/default_bet_value"
+                android:imeOptions="actionNone"
                 android:inputType="number"
                 android:singleLine="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -111,6 +112,7 @@
             android:contentDescription="@string/act_bet_create_filter_placeholder"
             android:ems="10"
             android:hint="@string/act_bet_create_filter_placeholder"
+            android:imeOptions="actionSearch"
             android:inputType="textPersonName" />
 
         <androidx.recyclerview.widget.RecyclerView
