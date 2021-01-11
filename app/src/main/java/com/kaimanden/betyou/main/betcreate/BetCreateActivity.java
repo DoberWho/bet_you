@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -223,6 +224,22 @@ public class BetCreateActivity extends BaseAct {
         // Permission has already been granted
         getContactList();
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode != MY_PERMISSIONS_REQUEST_CODE){
+            return;
+        }
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            // permission was granted, yay!
+            getContactList();
+            return;
+        }
+        showError(content, getString(R.string.error_permision_not_granted));
     }
 
     private void getContactList() {
