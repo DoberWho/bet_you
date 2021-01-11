@@ -1,6 +1,11 @@
 package com.kaimanden.betyou.tools;
 
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.kaimanden.betyou.R;
@@ -20,7 +25,17 @@ public class ToastController {
     }
 
     private Snackbar make(String msg){
-        return Snackbar.make(v, msg, Snackbar.LENGTH_LONG);
+        Snackbar snack = Snackbar.make(v, msg, Snackbar.LENGTH_LONG);
+        View view = snack.getView();
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+
+        if (params instanceof CoordinatorLayout.LayoutParams) {
+            ((CoordinatorLayout.LayoutParams) params).gravity = Gravity.TOP;
+        } else {
+            ((FrameLayout.LayoutParams) params).gravity = Gravity.TOP;
+        }
+        snack.getView().setLayoutParams(params);
+        return snack;
     }
 
     public void showInfo(String msg){
