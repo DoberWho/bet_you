@@ -56,8 +56,13 @@ public class DbController {
         mAuth = AuthController.init(act).getAuth();
     }
 
+    public FirebaseUser getUser(){
+
+        return mAuth.getCurrentUser();
+    }
+
     public void saveProfile(UserProfile profile, DbListener listener){
-        FirebaseUser user = mAuth.getCurrentUser();
+        FirebaseUser user = getUser();
         String uid = user.getUid();
         Map map = profile.toMap();
         map.put("uid", uid);
@@ -83,7 +88,7 @@ public class DbController {
     }
 
     public void getUserProfile(DbListener listener){
-        FirebaseUser user = mAuth.getCurrentUser();
+        FirebaseUser user = getUser();
         String uid = user.getUid();
 
         DocumentReference docRef = db.collection(USERS_COLLECTION).document(uid);
@@ -128,7 +133,7 @@ public class DbController {
 
     public void saveBetItem(BetItem bet, DbSaveListener listener) {
 
-        FirebaseUser user = mAuth.getCurrentUser();
+        FirebaseUser user = getUser();
         String uid = user.getUid();
         Map map = bet.toMap();
         map.put("uid", uid);
@@ -151,7 +156,7 @@ public class DbController {
     }
 
     public void getUserBetItems (){
-        FirebaseUser user = mAuth.getCurrentUser();
+        FirebaseUser user = getUser();
         String uid = user.getUid();
 
         Query query1 = db.collection(BET_COLLECTION).whereEqualTo("uid", uid);

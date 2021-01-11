@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.main.betcreate.BetCreateActivity;
@@ -93,11 +94,12 @@ public class BetFragment extends BaseFrg{
         bet.setTitle(title);
         bet.setDesc(desc);
 
-        //DbController.init(getActivity()).saveBetItem(bet);
-
+        FirebaseUser user = DbController.init(getActivity()).getUser();
+        bet.setOwner(user.getUid());
 
         Intent intent = new Intent(getActivity(), BetCreateActivity.class);
         intent.putExtra(BetCreateActivity.BETITEM, bet);
         startActivity(intent);
+
     }
 }

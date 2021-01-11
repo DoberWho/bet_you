@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class BetItem implements Serializable, DbObject {
 
+    private String owner;
     private String title = "";
     private String desc = "";
     private long betTime = 0;
@@ -42,11 +43,19 @@ public class BetItem implements Serializable, DbObject {
         this.betTime = betTime;
     }
 
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
     @Override
     public Map toMap() {
         HashMap map = new HashMap();
 
+        map.put("uid", this.owner);
         map.put("title", this.title);
         map.put("desc", this.desc);
         map.put("betTime", this.betTime);
@@ -69,4 +78,6 @@ public class BetItem implements Serializable, DbObject {
     public void setPrice(String price) {
         this.price = price;
     }
+
+
 }
