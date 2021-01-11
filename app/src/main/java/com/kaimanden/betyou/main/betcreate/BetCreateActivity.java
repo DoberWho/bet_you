@@ -145,7 +145,6 @@ public class BetCreateActivity extends BaseAct {
                 if (contactSelected == null || contactSelected.isEmpty()){
                     return;
                 }
-                showInfo(content, "Seleccionados:"+contactSelected.size());
                 selected = contactSelected;
             }
         };
