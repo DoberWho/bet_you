@@ -21,6 +21,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.kaimanden.betyou.R;
+import com.kaimanden.betyou.tools.interfaces.DbSaveListener;
 import com.kaimanden.betyou.tools.listeners.DbListener;
 import com.kaimanden.betyou.tools.models.BetItem;
 import com.kaimanden.betyou.tools.models.UserProfile;
@@ -125,7 +126,7 @@ public class DbController {
         //.collection("users").where("uid", "==", payload.uid)
     }
 
-    public void saveBetItem(BetItem bet) {
+    public void saveBetItem(BetItem bet, DbSaveListener listener) {
 
         FirebaseUser user = mAuth.getCurrentUser();
         String uid = user.getUid();
@@ -136,7 +137,7 @@ public class DbController {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference docRef) {
-
+                        if (listener != null) listener.saveOk();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -144,7 +145,7 @@ public class DbController {
                     public void onFailure(@NonNull Exception ex) {
                         ex.printStackTrace();
                         String error = ex.getLocalizedMessage();
-
+                        if (listener != null) listener.saveKO(error);
                     }
                 });
     }

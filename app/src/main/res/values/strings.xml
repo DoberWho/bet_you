@@ -58,4 +58,5 @@
     <string name="error_cursor_data_null">No se han recuperado los datos</string>
     <string name="act_bet_create_filter_placeholder">Buscar...</string>
     <string name="act_bet_create_btn_label">Apostar</string>
+    <string name="save_betitem_ok">Apuesta Creada</string>
 </resources>

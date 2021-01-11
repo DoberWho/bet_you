@@ -21,8 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseAct;
+import com.kaimanden.betyou.tools.DbController;
 import com.kaimanden.betyou.tools.adapters.ContactAdapter;
 import com.kaimanden.betyou.tools.interfaces.ContactSelected;
+import com.kaimanden.betyou.tools.interfaces.DbSaveListener;
+import com.kaimanden.betyou.tools.models.BetItem;
 import com.kaimanden.betyou.tools.models.Contact;
 import com.tomash.androidcontacts.contactgetter.entity.ContactData;
 import com.tomash.androidcontacts.contactgetter.main.contactsGetter.ContactsGetterBuilder;
@@ -44,15 +47,25 @@ public class BetCreateActivity extends BaseAct {
     private Button btnOk;
     private EditText edtMoney;
     private RecyclerView content;
+    private BetItem betItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_bet_create);
+        getBetitem();
         initViews();
         initButtons();
         checkPermission();
 
+    }
+
+    private void getBetitem() {
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) return;
+        BetItem item = (BetItem) extras.getSerializable(BETITEM);
+        if (item == null) return;
+        this.betItem = item;
     }
 
     private void initViews() {
@@ -161,6 +174,20 @@ public class BetCreateActivity extends BaseAct {
             showError(content, getString(R.string.error_empty_list_required));
             return;
         }
+
+        this.betItem.setSelected(this.selected);
+        this.betItem.setPrice(this.edtMoney.getText().toString());
+        DbController.init(this).saveBetItem(this.betItem, new DbSaveListener() {
+            @Override
+            public void saveOk() {
+                showInfo(content, getString(R.string.save_betitem_ok));
+            }
+
+            @Override
+            public void saveKO(String reason) {
+                showError(content, reason);
+            }
+        });
     }
 
 }
