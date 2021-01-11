@@ -43,10 +43,8 @@
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/frg_bet_desc_hint"
-            android:inputType="textMultiLine"
-            android:lines="2"
-            android:maxLines="2"
-            android:minLines="2" />
+            android:imeOptions="actionDone"
+            android:inputType="text" />
 
         <CalendarView
             android:id="@+id/frg_bet_calendar"
