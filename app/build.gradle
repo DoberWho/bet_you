@@ -44,4 +44,7 @@ dependencies {
     implementation "com.orhanobut:hawk:2.0.1"
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'com.tomash:androidcontacts:1.14.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }

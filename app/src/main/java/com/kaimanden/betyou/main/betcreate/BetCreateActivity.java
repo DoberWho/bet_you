@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseAct;
 import com.kaimanden.betyou.tools.adapters.ContactAdapter;
+import com.kaimanden.betyou.tools.interfaces.ContactSelected;
 import com.kaimanden.betyou.tools.models.Contact;
 import com.tomash.androidcontacts.contactgetter.entity.ContactData;
 import com.tomash.androidcontacts.contactgetter.main.contactsGetter.ContactsGetterBuilder;
@@ -98,27 +99,26 @@ public class BetCreateActivity extends BaseAct {
     }
 
     private void getContactList() {
-        List<ContactData> contactos = new ContactsGetterBuilder(this)
+        contactList = new ContactsGetterBuilder(this)
                 .allFields()
                 .buildList();
-
-        List<ContactData> res = new ArrayList<>();
-        for(ContactData contactData : contactos){
-            if (!contactData.getEmailList().isEmpty()){
-                res.add(contactData);
-            }
-        }
-        //contactList = res;
         updateContactsData();
     }
 
     private void updateContactsData() {
-
-        showInfo(content,"Creando Adapter: "+contactList.size());
+        ContactSelected listener = new ContactSelected() {
+            @Override
+            public void selected(List<ContactData> contactSelected) {
+                if (contactSelected == null || contactSelected.isEmpty()){
+                    return;
+                }
+                showInfo(content, "Seleccionados:"+contactSelected.size());
+            }
+        };
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         content.setLayoutManager(manager);
-        ContactAdapter adapter = new ContactAdapter(this, contactList);
+        ContactAdapter adapter = new ContactAdapter(this, contactList, listener);
         content.setAdapter(adapter);
 
     }
