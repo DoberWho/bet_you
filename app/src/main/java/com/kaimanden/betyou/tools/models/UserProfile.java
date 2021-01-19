@@ -1,5 +1,6 @@
 package com.kaimanden.betyou.tools.models;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.kaimanden.betyou.tools.interfaces.DbObject;
 
 import java.util.HashMap;
@@ -43,5 +44,10 @@ public class UserProfile implements DbObject {
         map.put("showNotifs", this.showNotifs);
 
         return map;
+    }
+
+    @Override
+    public Object toObject(DocumentSnapshot doc) {
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package com.kaimanden.betyou.tools;
 
 import android.app.Activity;
+import android.util.Log;
 
 
 import androidx.annotation.NonNull;
@@ -21,18 +22,23 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.kaimanden.betyou.R;
+import com.kaimanden.betyou.tools.interfaces.ChatListener;
 import com.kaimanden.betyou.tools.interfaces.DbSaveListener;
 import com.kaimanden.betyou.tools.listeners.DbListener;
 import com.kaimanden.betyou.tools.models.BetItem;
+import com.kaimanden.betyou.tools.models.Room;
 import com.kaimanden.betyou.tools.models.UserProfile;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DbController {
 
     private static final String USERS_COLLECTION = "users";
     private static final String BET_COLLECTION = "bets";
+    private static final String BET_CHATS = "rooms";
 
     private FirebaseFirestore db;
     private Activity act;
@@ -96,19 +102,20 @@ public class DbController {
         future.addOnCompleteListener(act, new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        UserProfile obj = doc.toObject(UserProfile.class);
-                        listener.isOk(obj);
-                    }else{
-                        String error = act.getString(R.string.error_profile_not_exist);
-                        listener.isKo(error);
-                    }
-                }else{
+                if (!task.isSuccessful()) {
                     String error = act.getString(R.string.error_profile_not_exist);
                     listener.isKo(error);
+                    return;
                 }
+
+                DocumentSnapshot doc = task.getResult();
+                if (!doc.exists()) {
+                    String error = act.getString(R.string.error_profile_not_exist);
+                    listener.isKo(error);
+                    return;
+                }
+                UserProfile obj = doc.toObject(UserProfile.class);
+                listener.isOk(obj);
             }
         });
 
@@ -175,5 +182,54 @@ public class DbController {
 
             }
         });
+    }
+
+    public void getChats(ChatListener listener) {
+        FirebaseUser user = getUser();
+        String uid = user.getUid();
+
+        Query query = db.collection(BET_CHATS).whereArrayContains("users", uid);
+        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable  QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null){
+                    if (listener != null){
+                        listener.ko(error.getLocalizedMessage());
+                    }
+                    return;
+                }
+
+                List<Room> rooms = new ArrayList<>();
+                Room room = new Room();
+                List<DocumentSnapshot> docs = value.getDocuments();
+                for (DocumentSnapshot doc : docs) {
+                    room = (Room) room.toObject(doc);
+                    rooms.add(room);
+                }
+                if (listener != null){
+                    listener.list(rooms);
+                }
+            }
+        });
+    }
+
+    public void saveRoom(Room room) {
+
+        Map map = room.toMap();
+        db.collection(BET_CHATS)
+                .add(map)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference docRef) {
+                        Log.d("CHAT", docRef.toString());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception ex) {
+                        ex.printStackTrace();
+                        String error = ex.getLocalizedMessage();
+                    }
+                });
     }
 }

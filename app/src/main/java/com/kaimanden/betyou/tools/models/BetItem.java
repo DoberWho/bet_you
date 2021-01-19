@@ -1,5 +1,6 @@
 package com.kaimanden.betyou.tools.models;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.kaimanden.betyou.tools.interfaces.DbObject;
 import com.tomash.androidcontacts.contactgetter.entity.ContactData;
 import com.tomash.androidcontacts.contactgetter.entity.Email;
@@ -69,6 +70,11 @@ public class BetItem implements Serializable, DbObject {
         map.put("contacts", contacts);
 
         return map;
+    }
+
+    @Override
+    public Object toObject(DocumentSnapshot doc) {
+        return null;
     }
 
     public void setSelected(List<ContactData> selected) {
