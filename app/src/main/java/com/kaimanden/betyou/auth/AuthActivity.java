@@ -56,9 +56,18 @@ public class AuthActivity extends BaseAct {
         startActivity(intent);
     }
 
+    private void goToLogin(){
+        Intent intent = new Intent(this, AuthActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(AuthEvent event) {
         switch (event.frgType){
+            case LOGOUT:
+                goToLogin();
+                break;
             case LOGIN_OK:
             case REGISTER_OK:
                 goToMain();

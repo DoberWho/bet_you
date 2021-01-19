@@ -85,6 +85,10 @@ public class AuthController {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(act, task);
     }
 
+    public void logOut() {
+        mAuth.signOut();
+    }
+
     public void recovery(String email) {
         OnCompleteListener<Void> task = new OnCompleteListener<Void>() {
             @Override
@@ -133,4 +137,6 @@ public class AuthController {
 
 
     }
+
+
 }

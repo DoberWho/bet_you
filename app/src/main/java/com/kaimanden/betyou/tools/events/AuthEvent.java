@@ -3,6 +3,7 @@ package com.kaimanden.betyou.tools.events;
 public class AuthEvent {
 
     public static enum FrgType {
+        LOGOUT,
         LOGIN,
         REGISTER,
         RECOVERY,

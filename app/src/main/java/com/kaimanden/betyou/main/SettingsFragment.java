@@ -14,6 +14,8 @@ import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.tools.AuthController;
 import com.kaimanden.betyou.tools.DbController;
+import com.kaimanden.betyou.tools.events.AuthEvent;
+import com.kaimanden.betyou.tools.events.LogOutEvent;
 import com.kaimanden.betyou.tools.listeners.AuthListener;
 import com.kaimanden.betyou.tools.listeners.DbListener;
 import com.kaimanden.betyou.tools.models.UserProfile;
@@ -22,7 +24,7 @@ public class SettingsFragment extends BaseFrg {
 
     private EditText edtName, edtPaypal, edtOldPass, edtPass, edtPassConfirm;
     private Switch swNotifs;
-    private Button btnProfile, btnPass;
+    private Button btnProfile, btnPass, btnLogOut;
     private DbController dbCtrl;
     private UserProfile currentProfile;
 
@@ -46,6 +48,7 @@ public class SettingsFragment extends BaseFrg {
         swNotifs = v.findViewById(R.id.frg_settings_notifications_sw);
         btnProfile = v.findViewById(R.id.frg_settings_profile_btn);
         btnPass = v.findViewById(R.id.frg_settings_pass_btn);
+        btnLogOut = v.findViewById(R.id.frg_settings_logout);
     }
 
     private void initButtons() {
@@ -63,6 +66,13 @@ public class SettingsFragment extends BaseFrg {
             }
         });
 
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AuthController.init(getActivity()).logOut();
+                sendEvent(AuthEvent.FrgType.LOGOUT);
+            }
+        });
     }
 
     private void saveProfile() {
