@@ -76,8 +76,8 @@ public class LoginFragment extends BaseFrg {
             return;
         }
 
+        showLoading(true);
         hideKeyb();
-        ((BaseAct)getActivity()).showLoading();
         AuthController.init(getActivity()).login(email, pass, new AuthListener() {
             @Override
             public void isOk(FirebaseUser user) {
