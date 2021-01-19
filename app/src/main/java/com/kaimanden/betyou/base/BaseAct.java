@@ -2,6 +2,7 @@ package com.kaimanden.betyou.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -32,7 +33,15 @@ public class BaseAct extends AppCompatActivity {
         super.onCreate(savedInstance);
         loadingCtrl = LoadingController.init(this);
 
-        getSupportActionBar().hide();
+        try {
+            getSupportActionBar().hide();
+        }catch(Exception e){
+            try{
+                getActionBar().hide();
+            }catch (Exception ex){
+                Log.e("ActionBar", ex.getLocalizedMessage());
+            }
+        }
 
         if(exHandler == null) exHandler = new EmergencyHandler(this);
         else exHandler.setActivity(this);
