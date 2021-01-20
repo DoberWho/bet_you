@@ -45,13 +45,7 @@ public class AuthController {
     }
 
     private void checkTask(Task task, AuthListener listener){
-        if (task.isSuccessful()) {
-            FirebaseUser user = mAuth.getCurrentUser();
-            currentUser = user;
-            if (listener != null) {
-                listener.isOk(user);
-            }
-        } else {
+        if (!task.isSuccessful()) {
             currentUser = null;
             // error
             Exception ex = task.getException();
@@ -60,7 +54,15 @@ public class AuthController {
             if (listener != null) {
                 listener.isKo(error);
             }
+            return;
         }
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        currentUser = user;
+        if (listener != null) {
+            listener.isOk(user);
+        }
+
     }
 
     private OnCompleteListener<AuthResult> getCompletedTas(AuthListener listener){
