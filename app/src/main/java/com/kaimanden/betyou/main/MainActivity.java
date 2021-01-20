@@ -16,7 +16,7 @@ import com.kaimanden.betyou.tools.controllers.AuthController;
 
 public class MainActivity extends BaseAct {
 
-    private BaseFrg currentFrg;
+    private BaseFrg currentFrg = null;
     private BaseFrg frgHome = new HomeFragment();
     private BaseFrg frgMoney = new MoneyFragment();
     private BaseFrg frgBet = new BetFragment();
@@ -33,7 +33,6 @@ public class MainActivity extends BaseAct {
         this.checkFrg();
         this.initViews();
         this.initButtons();
-        checkFrg();
     }
 
     private void initViews() {

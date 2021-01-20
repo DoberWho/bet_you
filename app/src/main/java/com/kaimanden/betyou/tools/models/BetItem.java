@@ -52,6 +52,14 @@ public class BetItem implements Serializable, DbObject {
         this.owner = owner;
     }
 
+    public List<ContactData> getSelected() {
+        return selected;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
     @Override
     public Map toMap() {
         HashMap map = new HashMap();

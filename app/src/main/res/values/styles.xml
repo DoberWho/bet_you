@@ -24,4 +24,16 @@
     <style name="BackgroundSelected">
         <item name="android:background">@drawable/selected_background</item>
     </style>
+
+    <style name="h_line">
+        <item name="android:height">1dp</item>
+        <item name="backgroundColor">@color/primaryColor</item>
+        <item name="color">@color/primaryColor</item>
+        <item name="android:colorBackground">@color/primaryColor</item>
+        <item name="android:color">@color/primaryColor</item>
+        <item name="paddingStart">8dp</item>
+        <item name="paddingEnd">8dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
 </resources>

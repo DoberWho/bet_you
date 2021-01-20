@@ -62,4 +62,6 @@
     <string name="default_bet_price">100</string>
     <string name="btn_logout">LogOut</string>
     <string name="request_recovery_ok">Enviado Mensaje de Recuperación</string>
+    <string name="tab_owner">Tus Apuestas</string>
+    <string name="tab_involved">Te Apostaron</string>
 </resources>

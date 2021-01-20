@@ -23,6 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.listeners.ChatListener;
+import com.kaimanden.betyou.tools.listeners.DbBetitemListener;
 import com.kaimanden.betyou.tools.listeners.DbSaveListener;
 import com.kaimanden.betyou.tools.listeners.DbListener;
 import com.kaimanden.betyou.tools.models.BetItem;
@@ -161,26 +162,54 @@ public class DbController {
                 });
     }
 
-    public void getUserBetItems (){
+    private EventListener<QuerySnapshot> getEventListener(DbBetitemListener listener) {
+        return new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable  QuerySnapshot value, @Nullable  FirebaseFirestoreException error) {
+                if (error != null){
+                    int code = error.getCode().value();
+                    String msg = error.getLocalizedMessage();
+                    if (listener != null){
+                        listener.isKo(msg);
+                    }
+                    return;
+                }
+                List<BetItem> items = new ArrayList<>();
+                for (DocumentSnapshot doc: value.getDocuments()) {
+                    BetItem item = doc.toObject(BetItem.class);
+                    items.add(item);
+                }
+                if (listener != null){
+                    listener.isOk(items);
+                }
+            }
+        };
+    }
+
+    private void getOwnerBets(String uid, DbBetitemListener listener){
+        Query query = db.collection(BET_COLLECTION).whereEqualTo("uid", uid);
+        EventListener<QuerySnapshot> eventListener = this.getEventListener(listener);
+        query.addSnapshotListener(eventListener);
+    }
+
+    private void getInvolvedBets(String uid, DbBetitemListener listener){
+        Query query = db.collection(BET_COLLECTION).whereArrayContains("users", uid);
+        EventListener<QuerySnapshot> eventListener = this.getEventListener(listener);
+        query.addSnapshotListener(eventListener);
+    }
+
+
+
+    public void getUserBetItems (boolean owner, DbBetitemListener listener){
         FirebaseUser user = getUser();
         String uid = user.getUid();
 
-        Query query1 = db.collection(BET_COLLECTION).whereEqualTo("uid", uid);
-        Query query2 = db.collection(BET_COLLECTION).whereArrayContains("users", uid);
+        if (owner){
+            getOwnerBets(uid, listener);
+            return;
+        }
+        getInvolvedBets(uid, listener);
 
-        query1.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable  QuerySnapshot value, @Nullable  FirebaseFirestoreException error) {
-
-            }
-        });
-
-        query2.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable  QuerySnapshot value, @Nullable  FirebaseFirestoreException error) {
-
-            }
-        });
     }
 
     public void getChats(ChatListener listener) {

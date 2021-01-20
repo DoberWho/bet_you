@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="75"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/adapter_betitem_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:text="Title"
+            android:textColor="@color/primaryDarkColor"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/adapter_betitem_owner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:padding="8dp"
+            android:text="Owner"
+            android:textColor="@color/secondaryColor" />
+
+        <LinearLayout
+            style="@style/h_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/primaryColor"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"></LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/adapter_betitem_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="25"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="10000€"
+        android:textStyle="bold" />
+
+</LinearLayout>
