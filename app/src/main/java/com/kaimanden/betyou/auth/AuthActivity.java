@@ -59,7 +59,11 @@ public class AuthActivity extends BaseAct {
     private void goToLogin(){
         Intent intent = new Intent(this, AuthActivity.class);
         startActivity(intent);
-        finish();
+       try{
+           finish();
+       }catch (Exception e){
+
+       }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

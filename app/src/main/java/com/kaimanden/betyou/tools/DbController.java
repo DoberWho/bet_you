@@ -123,7 +123,7 @@ public class DbController {
 
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (value.exists()) {
+                if (value != null && value.exists()) {
                     UserProfile obj = value.toObject(UserProfile.class);
                     listener.isOk(obj);
                 }else{
