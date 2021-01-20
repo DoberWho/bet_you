@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseAct;
-import com.kaimanden.betyou.tools.DbController;
+import com.kaimanden.betyou.tools.controllers.DbController;
 import com.kaimanden.betyou.tools.adapters.ContactAdapter;
 import com.kaimanden.betyou.tools.listeners.ContactSelected;
 import com.kaimanden.betyou.tools.listeners.DbSaveListener;

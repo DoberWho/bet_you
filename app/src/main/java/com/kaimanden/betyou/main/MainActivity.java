@@ -12,12 +12,7 @@ import com.kaimanden.betyou.base.BaseAct;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.auth.AuthActivity;
 import com.kaimanden.betyou.base.BaseFrg;
-import com.kaimanden.betyou.tools.AuthController;
-import com.kaimanden.betyou.tools.events.BaseEvent;
-import com.kaimanden.betyou.tools.events.MenuEvent;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import com.kaimanden.betyou.tools.controllers.AuthController;
 
 public class MainActivity extends BaseAct {
 
@@ -38,9 +33,8 @@ public class MainActivity extends BaseAct {
         this.checkFrg();
         this.initViews();
         this.initButtons();
+        checkFrg();
     }
-
-
 
     private void initViews() {
         btnHome     = findViewById(R.id.act_main_menu_home);

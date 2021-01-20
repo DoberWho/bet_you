@@ -1,4 +1,4 @@
-package com.kaimanden.betyou.tools;
+package com.kaimanden.betyou.tools.controllers;
 
 import android.app.Activity;
 

@@ -12,16 +12,12 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import com.google.firebase.auth.FirebaseUser;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.main.betcreate.BetCreateActivity;
-import com.kaimanden.betyou.tools.DbController;
-import com.kaimanden.betyou.tools.listeners.DbListener;
+import com.kaimanden.betyou.tools.controllers.DbController;
 import com.kaimanden.betyou.tools.models.BetItem;
-import com.kaimanden.betyou.tools.models.UserProfile;
 
 import java.util.Date;
 

@@ -7,14 +7,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.kaimanden.betyou.tools.LoadingController;
-import com.kaimanden.betyou.tools.ToastController;
+import com.kaimanden.betyou.tools.controllers.LoadingController;
+import com.kaimanden.betyou.tools.controllers.ToastController;
 import com.kaimanden.betyou.tools.events.BaseEvent;
-import com.kaimanden.betyou.tools.EmergencyHandler;
+import com.kaimanden.betyou.tools.controllers.EmergencyHandler;
 import com.kaimanden.betyou.tools.events.LoadingEvent;
 
 import org.greenrobot.eventbus.EventBus;

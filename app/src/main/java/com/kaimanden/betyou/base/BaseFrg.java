@@ -7,7 +7,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import com.kaimanden.betyou.tools.ToastController;
+import com.kaimanden.betyou.tools.controllers.ToastController;
 import com.kaimanden.betyou.tools.events.AuthEvent;
 import com.kaimanden.betyou.tools.events.LoadingEvent;
 

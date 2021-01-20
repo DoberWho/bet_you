@@ -12,7 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseUser;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseFrg;
-import com.kaimanden.betyou.tools.DbController;
+import com.kaimanden.betyou.tools.controllers.DbController;
 import com.kaimanden.betyou.tools.adapters.RoomAdapter;
 import com.kaimanden.betyou.tools.listeners.ChatListener;
 import com.kaimanden.betyou.tools.listeners.DbListener;
