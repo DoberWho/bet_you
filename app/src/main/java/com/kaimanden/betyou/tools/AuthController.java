@@ -91,13 +91,19 @@ public class AuthController {
         mAuth.signOut();
     }
 
-    public void recovery(String email) {
+    public void recovery(String email, AuthListener listener) {
         OnCompleteListener<Void> task = new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (!task.isSuccessful()){
                     Exception ex = task.getException();
-
+                    if (listener != null){
+                        listener.isKo(ex.getLocalizedMessage());
+                    }
+                    return;
+                }
+                if (listener != null){
+                    listener.isOk(null);
                 }
             }
         };

@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.tools.AuthController;
 import com.kaimanden.betyou.tools.events.AuthEvent;
+import com.kaimanden.betyou.tools.listeners.AuthListener;
 
 
 public class RecoveryFragment extends BaseFrg {
@@ -40,13 +42,13 @@ public class RecoveryFragment extends BaseFrg {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkFormData();
+                sendEvent(AuthEvent.FrgType.LOGIN);
             }
         });
         btnRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendEvent(AuthEvent.FrgType.RECOVERY);
+                checkFormData();
             }
         });
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +67,23 @@ public class RecoveryFragment extends BaseFrg {
             return;
         }
 
-        AuthController.init(getActivity()).recovery(email);
+        hideKeyb();
+        showLoading(true);
+        AuthListener listener = new AuthListener() {
+            @Override
+            public void isOk(FirebaseUser user) {
+                showLoading(false);
+                String msg = getString(R.string.request_recovery_ok);
+                showInfo(msg);
+            }
+
+            @Override
+            public void isKo(String error) {
+                showLoading(false);
+                showError(error);
+            }
+        };
+        AuthController.init(getActivity()).recovery(email, listener);
 
     }
 

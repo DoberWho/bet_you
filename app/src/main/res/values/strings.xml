@@ -61,4 +61,5 @@
     <string name="save_betitem_ok">Apuesta Creada</string>
     <string name="default_bet_price">100</string>
     <string name="btn_logout">LogOut</string>
+    <string name="request_recovery_ok">Enviado Mensaje de Recuperación</string>
 </resources>
