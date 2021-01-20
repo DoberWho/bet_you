@@ -1,4 +1,4 @@
-package com.kaimanden.betyou.tools.interfaces;
+package com.kaimanden.betyou.tools.listeners;
 
 public interface DbSaveListener {
     void saveOk();

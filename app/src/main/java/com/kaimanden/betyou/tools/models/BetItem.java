@@ -1,7 +1,7 @@
 package com.kaimanden.betyou.tools.models;
 
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.kaimanden.betyou.tools.interfaces.DbObject;
+import com.kaimanden.betyou.tools.listeners.DbObject;
 import com.tomash.androidcontacts.contactgetter.entity.ContactData;
 import com.tomash.androidcontacts.contactgetter.entity.Email;
 

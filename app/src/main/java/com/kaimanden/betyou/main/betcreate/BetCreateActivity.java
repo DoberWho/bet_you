@@ -1,14 +1,10 @@
 package com.kaimanden.betyou.main.betcreate;
 
 import android.Manifest;
-import android.content.ContentResolver;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,12 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,18 +22,15 @@ import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseAct;
 import com.kaimanden.betyou.tools.DbController;
 import com.kaimanden.betyou.tools.adapters.ContactAdapter;
-import com.kaimanden.betyou.tools.interfaces.ContactSelected;
-import com.kaimanden.betyou.tools.interfaces.DbSaveListener;
+import com.kaimanden.betyou.tools.listeners.ContactSelected;
+import com.kaimanden.betyou.tools.listeners.DbSaveListener;
 import com.kaimanden.betyou.tools.models.BetItem;
-import com.kaimanden.betyou.tools.models.Contact;
 import com.tomash.androidcontacts.contactgetter.entity.ContactData;
 import com.tomash.androidcontacts.contactgetter.entity.Email;
 import com.tomash.androidcontacts.contactgetter.main.contactsGetter.ContactsGetterBuilder;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class BetCreateActivity extends BaseAct {
 

@@ -22,15 +22,14 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.kaimanden.betyou.R;
-import com.kaimanden.betyou.tools.interfaces.ChatListener;
-import com.kaimanden.betyou.tools.interfaces.DbSaveListener;
+import com.kaimanden.betyou.tools.listeners.ChatListener;
+import com.kaimanden.betyou.tools.listeners.DbSaveListener;
 import com.kaimanden.betyou.tools.listeners.DbListener;
 import com.kaimanden.betyou.tools.models.BetItem;
 import com.kaimanden.betyou.tools.models.Room;
 import com.kaimanden.betyou.tools.models.UserProfile;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

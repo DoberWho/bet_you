@@ -12,14 +12,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseUser;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseFrg;
-import com.kaimanden.betyou.tools.AuthController;
 import com.kaimanden.betyou.tools.DbController;
 import com.kaimanden.betyou.tools.adapters.RoomAdapter;
-import com.kaimanden.betyou.tools.interfaces.ChatListener;
+import com.kaimanden.betyou.tools.listeners.ChatListener;
 import com.kaimanden.betyou.tools.listeners.DbListener;
 import com.kaimanden.betyou.tools.models.Mensaje;
 import com.kaimanden.betyou.tools.models.Room;
-import com.kaimanden.betyou.tools.models.User;
 import com.kaimanden.betyou.tools.models.UserProfile;
 
 import java.util.ArrayList;

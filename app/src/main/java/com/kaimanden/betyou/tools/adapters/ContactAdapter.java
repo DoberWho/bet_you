@@ -1,7 +1,6 @@
 package com.kaimanden.betyou.tools.adapters;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.kaimanden.betyou.R;
-import com.kaimanden.betyou.tools.interfaces.ContactSelected;
-import com.kaimanden.betyou.tools.models.Contact;
+import com.kaimanden.betyou.tools.listeners.ContactSelected;
 import com.tomash.androidcontacts.contactgetter.entity.ContactData;
 import com.tomash.androidcontacts.contactgetter.entity.Email;
 

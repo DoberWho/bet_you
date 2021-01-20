@@ -95,9 +95,8 @@ public class AuthController {
         OnCompleteListener<Void> task = new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-
-                }else{
+                if (!task.isSuccessful()){
+                    Exception ex = task.getException();
 
                 }
             }

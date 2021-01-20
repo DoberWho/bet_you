@@ -1,25 +1,18 @@
 package com.kaimanden.betyou.tools.adapters;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.kaimanden.betyou.R;
-import com.kaimanden.betyou.tools.interfaces.ContactSelected;
 import com.kaimanden.betyou.tools.models.Room;
-import com.tomash.androidcontacts.contactgetter.entity.ContactData;
-import com.tomash.androidcontacts.contactgetter.entity.Email;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ContactoHolder> {
