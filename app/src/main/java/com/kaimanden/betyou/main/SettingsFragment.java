@@ -1,15 +1,28 @@
 package com.kaimanden.betyou.main;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.tools.controllers.AuthController;
@@ -19,9 +32,17 @@ import com.kaimanden.betyou.tools.listeners.AuthListener;
 import com.kaimanden.betyou.tools.listeners.DbListener;
 import com.kaimanden.betyou.tools.models.UserProfile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 public class SettingsFragment extends BaseFrg {
 
+    public static final int PICK_IMAGE = 12345;
+
     private EditText edtName, edtPaypal, edtOldPass, edtPass, edtPassConfirm;
+    private ImageView imgProfile;
     private Switch swNotifs;
     private Button btnProfile, btnPass, btnLogOut;
     private DbController dbCtrl;
@@ -48,6 +69,7 @@ public class SettingsFragment extends BaseFrg {
         btnProfile = v.findViewById(R.id.frg_settings_profile_btn);
         btnPass = v.findViewById(R.id.frg_settings_pass_btn);
         btnLogOut = v.findViewById(R.id.frg_settings_logout);
+        imgProfile = v.findViewById(R.id.frg_settings_image);
     }
 
     private void initButtons() {
@@ -72,6 +94,74 @@ public class SettingsFragment extends BaseFrg {
                 sendEvent(AuthEvent.FrgType.LOGOUT);
             }
         });
+
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subirFichero();
+            }
+        });
+    }
+
+    private void subirFichero(){
+
+        try{
+            File file = createFile();
+            Uri uri = Uri.fromFile(file);
+
+            FirebaseUser user = DbController.init(getActivity()).getUser();
+            String uid = user.getUid();
+            StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+            StorageReference riversRef = mStorageRef.child("profiles/"+uid);
+
+            riversRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    showInfo("Fue Bien");
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    showError(e.getLocalizedMessage());
+                }
+            });
+
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("ERROR", e.getLocalizedMessage());
+        }
+    }
+
+    private void selectImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        String label = getString(R.string.select_picture);
+        startActivityForResult(Intent.createChooser(intent, label), PICK_IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_IMAGE) {
+            //TODO: Recoger una foto
+
+        }
+    }
+
+    private File createFile() throws IOException {
+
+        File file = File.createTempFile("temp", "xss");
+        file.createNewFile();
+        byte[] data1={1,1,0,0};
+
+        if(file.exists())
+        {
+            OutputStream fo = new FileOutputStream(file);
+            fo.write(data1);
+            fo.close();
+            System.out.println("file created: "+file);
+        }
+        return file;
     }
 
     private void saveProfile() {
