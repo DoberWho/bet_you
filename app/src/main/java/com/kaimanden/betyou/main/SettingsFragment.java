@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -130,6 +131,30 @@ public class SettingsFragment extends BaseFrg {
             e.printStackTrace();
             Log.e("ERROR", e.getLocalizedMessage());
         }
+    }
+
+    private void downloadImageProfile () throws IOException {
+        FirebaseUser user = DbController.init(getActivity()).getUser();
+        String uid = user.getUid();
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference riversRef = mStorageRef.child("profiles/"+uid);
+
+        File localFile = File.createTempFile("images", "jpg");
+
+        riversRef.getFile(localFile)
+                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        // Successfully downloaded data to local file
+                        // ...
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                showError(exception.getLocalizedMessage());
+            }
+        });
+
     }
 
     private void selectImage() {
