@@ -19,7 +19,4 @@ public class UserActivity extends BaseAct {
         setContentView(R.layout.act_user);
     }
 
-    public void onReceive(Context context, Intent intent) {
-        // TODO: Recibimos el intent de la aplicación externa.
-    }
 }
