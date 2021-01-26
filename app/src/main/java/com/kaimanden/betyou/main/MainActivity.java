@@ -37,14 +37,16 @@ public class MainActivity extends BaseAct {
         this.checkFrg();
         this.initViews();
         this.initButtons();
-        this.registerRecievers();
+
     }
 
     private void registerRecievers() {
 
         BroadcastReceiver br = new VolumeReciever();
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        filter.addAction(Intent.ACTION_BATTERY_LOW);
+        filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        filter.addAction(Intent.ACTION_CALL);
+        filter.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
         this.registerReceiver(br, filter);
 
     }

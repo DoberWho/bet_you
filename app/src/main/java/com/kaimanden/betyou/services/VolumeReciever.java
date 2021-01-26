@@ -7,6 +7,7 @@ import android.content.Intent;
 
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.main.MainActivity;
+import com.kaimanden.betyou.tools.controllers.AuthController;
 import com.kaimanden.betyou.tools.controllers.ToastController;
 
 public class VolumeReciever extends BroadcastReceiver {
@@ -15,6 +16,8 @@ public class VolumeReciever extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String msg = context.getString(R.string.mensaje_volumen);
         ToastController.init(null).toast(context, msg);
+
+        AuthController.init(null).logOut();
 
         Intent intent1 = new Intent(context, MainActivity.class);
         context.startActivity(intent1);

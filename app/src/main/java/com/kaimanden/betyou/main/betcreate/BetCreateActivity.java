@@ -148,6 +148,7 @@ public class BetCreateActivity extends BaseAct {
         this.filteredContacts = filtered;
     }
 
+
     private void initButtons() {
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/act_main_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.MainActivity">
+
+    <ScrollView
+        android:id="@+id/act_main_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/act_main_menu_home"
+            style="@style/BtnMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:contentDescription="@string/content_desc_menu_home"
+         app:srcCompat="@drawable/ic_home" />
+
+        <ImageButton
+            android:id="@+id/act_main_menu_money"
+            style="@style/BtnMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:contentDescription="@string/content_desc_menu_money"
+            app:srcCompat="@drawable/ic_money" />
+
+        <ImageButton
+            android:id="@+id/act_main_menu_bet"
+            style="@style/BtnMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/content_desc_menu_bet"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            app:srcCompat="@drawable/ic_new_bet" />
+
+        <ImageButton
+            android:id="@+id/act_main_menu_calendar"
+            style="@style/BtnMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:contentDescription="@string/content_desc_menu_calendar"
+            app:srcCompat="@drawable/ic_calendar" />
+
+        <ImageButton
+            android:id="@+id/act_main_menu_settings"
+            style="@style/BtnMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:contentDescription="@string/content_desc_menu_settings"
+            app:srcCompat="@drawable/ic_settings" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
