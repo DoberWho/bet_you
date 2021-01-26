@@ -3,7 +3,6 @@ package com.kaimanden.betyou.main;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +14,16 @@ import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.kaimanden.betyou.R;
+import com.kaimanden.betyou.base.BaseAct;
 import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.tools.controllers.AuthController;
 import com.kaimanden.betyou.tools.controllers.DbController;
@@ -37,6 +36,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Set;
 
 public class SettingsFragment extends BaseFrg {
 
@@ -57,6 +57,11 @@ public class SettingsFragment extends BaseFrg {
         dbCtrl = DbController.init(getActivity());
         initButtons();
         getUserProfile();
+        try {
+            downloadImageProfile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return v;
     }
 
@@ -99,16 +104,43 @@ public class SettingsFragment extends BaseFrg {
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                subirFichero();
+                selectImage();
             }
         });
     }
 
-    private void subirFichero(){
+
+    private void selectImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        String label = getString(R.string.select_picture);
+        Intent iChooser = Intent.createChooser(intent, label);
+        startActivityForResult(iChooser, PICK_IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode != PICK_IMAGE) {
+            return;
+        }
+
+        //TODO: Recoger una foto
+        if (resultCode != BaseAct.RESULT_OK){
+            showError("No Pude coger el fichero");
+            return;
+        }
+
+        Uri uri = data.getData();
+        Glide.with(imgProfile).load(uri).into(imgProfile);
+
+        subirFichero(uri);
+
+    }
+
+    private void subirFichero(Uri uri){
 
         try{
-            File file = createFile();
-            Uri uri = Uri.fromFile(file);
 
             FirebaseUser user = DbController.init(getActivity()).getUser();
             String uid = user.getUid();
@@ -146,7 +178,9 @@ public class SettingsFragment extends BaseFrg {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                         // Successfully downloaded data to local file
-                        // ...
+
+                        Uri uri = Uri.fromFile(localFile);
+                        Glide.with(imgProfile).load(uri).into(imgProfile);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -155,22 +189,6 @@ public class SettingsFragment extends BaseFrg {
             }
         });
 
-    }
-
-    private void selectImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        String label = getString(R.string.select_picture);
-        startActivityForResult(Intent.createChooser(intent, label), PICK_IMAGE);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PICK_IMAGE) {
-            //TODO: Recoger una foto
-
-        }
     }
 
     private File createFile() throws IOException {
