@@ -132,7 +132,7 @@ public class SettingsFragment extends BaseFrg {
         }
 
         Uri uri = data.getData();
-        Glide.with(imgProfile).load(uri).into(imgProfile);
+        Glide.with(imgProfile).load(uri).centerInside().into(imgProfile);
 
         subirFichero(uri);
 
