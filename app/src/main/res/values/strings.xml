@@ -65,4 +65,5 @@
     <string name="tab_owner">Tus Apuestas</string>
     <string name="tab_involved">Te Apostaron</string>
     <string name="select_picture">Elige la Imagen</string>
+    <string name="mensaje_volumen">Cambió el volumen</string>
 </resources>

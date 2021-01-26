@@ -1,9 +1,11 @@
 package com.kaimanden.betyou.tools.controllers;
 
+import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
@@ -22,6 +24,10 @@ public class ToastController {
         }
         instance.v = v;
         return instance;
+    }
+
+    public void toast(Context ctx, String msg){
+        Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
     }
 
     private Snackbar make(String msg){

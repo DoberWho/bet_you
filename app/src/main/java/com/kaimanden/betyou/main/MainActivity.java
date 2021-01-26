@@ -1,6 +1,9 @@
 package com.kaimanden.betyou.main;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,6 +15,7 @@ import com.kaimanden.betyou.base.BaseAct;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.auth.AuthActivity;
 import com.kaimanden.betyou.base.BaseFrg;
+import com.kaimanden.betyou.services.VolumeReciever;
 import com.kaimanden.betyou.tools.controllers.AuthController;
 
 public class MainActivity extends BaseAct {
@@ -33,6 +37,16 @@ public class MainActivity extends BaseAct {
         this.checkFrg();
         this.initViews();
         this.initButtons();
+        this.registerRecievers();
+    }
+
+    private void registerRecievers() {
+
+        BroadcastReceiver br = new VolumeReciever();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        filter.addAction(Intent.ACTION_BATTERY_LOW);
+        this.registerReceiver(br, filter);
+
     }
 
     private void initViews() {
