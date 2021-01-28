@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.kaimanden.betyou.base.BaseAct;
 import com.kaimanden.betyou.main.MainActivity;
 import com.kaimanden.betyou.R;
+import com.kaimanden.betyou.tools.controllers.AuthController;
 import com.kaimanden.betyou.tools.events.AuthEvent;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -26,6 +27,15 @@ public class AuthActivity extends BaseAct {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_auth);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            boolean doLogOut = bundle.getBoolean("DO_LOGOUT", false);
+            if (doLogOut){
+                AuthController.init(this).logOut();
+            }
+        }
+
         initViews();
         initFrg();
     }
