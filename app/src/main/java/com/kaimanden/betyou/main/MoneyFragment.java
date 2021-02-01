@@ -5,6 +5,9 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -20,10 +23,12 @@ import androidx.core.app.NotificationManagerCompat;
 import com.kaimanden.betyou.R;
 import com.kaimanden.betyou.auth.AuthActivity;
 import com.kaimanden.betyou.base.BaseFrg;
+import com.kaimanden.betyou.services.NotificationJobService;
 import com.kaimanden.betyou.services.VolumeReciever;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import static android.app.Notification.EXTRA_NOTIFICATION_ID;
 
@@ -85,7 +90,7 @@ public class MoneyFragment extends BaseFrg {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchNotif3();
+                launchJobService();
             }
         });
 
@@ -109,6 +114,23 @@ public class MoneyFragment extends BaseFrg {
         });
 
 
+    }
+
+    private void launchJobService() {
+        Context ctx = getActivity();
+        ComponentName serviceComponent = new ComponentName(ctx, NotificationJobService.class);
+        JobInfo.Builder builder = new JobInfo.Builder(0, serviceComponent);
+        builder.setMinimumLatency( 15 * 1000); // wait at least
+        builder.setOverrideDeadline(20 * 1000); // maximum delay
+        //builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_METERED); // require unmetered network
+        //builder.setRequiresDeviceIdle(true); // device should be idle
+        //builder.setRequiresCharging(false); // we don't care if the device is charging or not
+        //builder.setPeriodic(TimeUnit.SECONDS.toMillis(15), TimeUnit.SECONDS.toMillis(5));
+        builder.setPersisted(true);
+
+        JobScheduler jobScheduler = ctx.getSystemService(JobScheduler.class);
+        JobInfo job = builder.build();
+        jobScheduler.schedule(job);
     }
 
     private void launchNotif1() {

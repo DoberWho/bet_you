@@ -90,4 +90,12 @@
             android:layout_weight="1"
             android:text="Notif 3" />
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
 </LinearLayout>
