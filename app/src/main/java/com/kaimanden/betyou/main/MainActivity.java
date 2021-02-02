@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -82,7 +83,8 @@ public class MainActivity extends BaseAct {
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragment(frgSettings);
+                PrefSettingsFragment frgLocal = new PrefSettingsFragment();
+                changeFragment(frgLocal);
             }
         });
         btnListBet.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +116,13 @@ public class MainActivity extends BaseAct {
         trans.replace(R.id.act_main_container, frg, "menu_fragment");
         trans.commit();
         currentFrg = frg;
+    }
+
+    private void changeFragment(Fragment frg){
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction trans = manager.beginTransaction();
+        trans.replace(R.id.act_main_container, frg, "menu_fragment");
+        trans.commit();
     }
 
 }
