@@ -1,4 +1,22 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/preferences_notifications">
+
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            app:title="@string/preferences_notifications_title"
+            app:summary="@string/preferences_notifications_subtitle"
+            app:defaultValue="@bool/preferences_notifications_default"/>
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/preferences_hours_labels"
+            android:entryValues="@array/preferences_hours_values"
+            android:key="list_preference_1"
+            android:title="List preference" />
+
+    </PreferenceCategory>
+
 
     <PreferenceCategory app:title="@string/messages_header">
 

@@ -10,6 +10,7 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,6 +36,8 @@ import static android.app.Notification.EXTRA_NOTIFICATION_ID;
 public class MoneyFragment extends BaseFrg {
 
     private Button btn1, btn2, btn3,btn4, btn5, btn6, btn7, btn8, btn9;
+    private boolean canShowNotif = false;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,7 +45,24 @@ public class MoneyFragment extends BaseFrg {
         View v = inflater.inflate(R.layout.frg_money, container, false);
         createNotificationChannel();
         initViews(v);
+        checkAllowNotifs();
         return v;
+    }
+
+    private void checkAllowNotifs() {
+
+        Calendar cal = Calendar.getInstance();
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+
+        String fileName = getString(R.string.sharedpreferences_file);
+        Context ctx = getContext();
+        SharedPreferences sharedPref = ctx.getSharedPreferences( fileName, Context.MODE_PRIVATE);
+        int prefHour = sharedPref.getInt("list_preference_1", 0);
+
+        if (prefHour >= hour){
+            canShowNotif = true;
+        }
+
     }
 
     private void initViews(View v) {
@@ -59,57 +79,57 @@ public class MoneyFragment extends BaseFrg {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchNotif1();
+                if ( canShowNotif ) launchNotif1();
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchNotif2();
+                if ( canShowNotif ) launchNotif2();
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchNotif3();
+                if ( canShowNotif ) launchNotif3();
             }
         });
 
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchNotif4();
+                if ( canShowNotif ) launchNotif4();
             }
         });
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchAlarm1();
+                if ( canShowNotif ) launchAlarm1();
             }
         });
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchJobService();
+                if ( canShowNotif ) launchJobService();
             }
         });
 
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchNotif1();
+                if ( canShowNotif ) launchNotif1();
             }
         });
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchNotif2();
+                if ( canShowNotif )  launchNotif2();
             }
         });
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchNotif3();
+                if ( canShowNotif )  launchNotif3();
             }
         });
 

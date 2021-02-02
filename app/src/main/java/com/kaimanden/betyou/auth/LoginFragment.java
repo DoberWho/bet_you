@@ -81,7 +81,7 @@ public class LoginFragment extends BaseFrg {
             public void isOk(FirebaseUser user) {
                 String msg = getString(R.string.request_login_ok);
                 showInfo(msg);
-                showLoading(true);
+                showLoading(false);
                 sendEvent(AuthEvent.FrgType.LOGIN_OK);
             }
 

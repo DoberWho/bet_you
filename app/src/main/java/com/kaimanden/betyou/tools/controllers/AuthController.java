@@ -84,7 +84,24 @@ public class AuthController {
 
     public void login(String email, String password, AuthListener listener){
         OnCompleteListener<AuthResult> task = this.getCompletedTas(listener);
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(act, task);
+
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(act, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull  Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    if (listener != null){
+                        listener.isOk(mAuth.getCurrentUser());
+                    }
+                }else{
+                    if (listener != null){
+                        Exception e = task.getException();
+                        listener.isKo(e.getLocalizedMessage());
+                    }
+                }
+            }
+        });
     }
 
     public void logOut() {
