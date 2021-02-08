@@ -19,6 +19,9 @@ import com.kaimanden.betyou.base.BaseFrg;
 import com.kaimanden.betyou.services.VolumeReciever;
 import com.kaimanden.betyou.tools.controllers.AuthController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends BaseAct {
 
     private BaseFrg currentFrg = null;
@@ -38,7 +41,6 @@ public class MainActivity extends BaseAct {
         this.checkFrg();
         this.initViews();
         this.initButtons();
-
     }
 
     private void registerRecievers() {
@@ -125,5 +127,7 @@ public class MainActivity extends BaseAct {
         trans.replace(R.id.act_main_container, frg, "menu_fragment");
         trans.commit();
     }
+
+
 
 }
