@@ -98,27 +98,6 @@ public class DbController {
         String uid = user.getUid();
 
         DocumentReference docRef = db.collection(USERS_COLLECTION).document(uid);
-        Task<DocumentSnapshot> future = docRef.get();
-        future.addOnCompleteListener(act, new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    String error = act.getString(R.string.error_profile_not_exist);
-                    listener.isKo(error);
-                    return;
-                }
-
-                DocumentSnapshot doc = task.getResult();
-                if (!doc.exists()) {
-                    String error = act.getString(R.string.error_profile_not_exist);
-                    listener.isKo(error);
-                    return;
-                }
-                UserProfile obj = doc.toObject(UserProfile.class);
-                listener.isOk(obj);
-            }
-        });
-
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
 
             @Override

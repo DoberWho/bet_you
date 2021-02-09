@@ -86,8 +86,8 @@ public class MainActivity extends BaseAct {
             @Override
             public void onClick(View view) {
                 PrefSettingsFragment frgLocal = new PrefSettingsFragment();
-                changeFragment(frgLocal);
-                //changeFragment(frgSettings);
+                //changeFragment(frgLocal);
+                changeFragment(frgSettings);
             }
         });
         btnListBet.setOnClickListener(new View.OnClickListener() {
