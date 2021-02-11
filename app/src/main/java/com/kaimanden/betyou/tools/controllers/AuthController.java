@@ -91,6 +91,7 @@ public class AuthController {
             @Override
             public void onComplete(@NonNull  Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    DbController.init(act).getUserProfile(null);
                     if (listener != null){
                         listener.isOk(mAuth.getCurrentUser());
                     }

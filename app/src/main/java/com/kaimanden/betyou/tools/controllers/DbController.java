@@ -1,6 +1,8 @@
 package com.kaimanden.betyou.tools.controllers;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 
@@ -104,13 +106,33 @@ public class DbController {
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (value != null && value.exists()) {
                     UserProfile obj = value.toObject(UserProfile.class);
-                    listener.isOk(obj);
+                    saveOnShared(obj);
+                    if (listener != null){
+                        listener.isOk(obj);
+                    }
                 }else{
                     String err = act.getString(R.string.error_profile_not_exist);
-                    listener.isKo(err);
+                    if (listener != null){
+                        listener.isKo(err);
+                    }
                 }
             }
         });
+    }
+
+    private void saveOnShared(UserProfile user) {
+        if (user == null){
+            return;
+        }
+
+        String fileName = act.getString(R.string.sharedpreferences_file);
+        SharedPreferences sharedPref = act.getSharedPreferences(fileName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putStringSet("profile", user.toMap().entrySet() );
+
+        editor.commit();
+
     }
 
     private void updateProfile(FirebaseUser user, UserProfile profile, DbListener listener){

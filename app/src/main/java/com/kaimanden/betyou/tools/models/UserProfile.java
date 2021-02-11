@@ -3,10 +3,11 @@ package com.kaimanden.betyou.tools.models;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.kaimanden.betyou.tools.listeners.DbObject;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserProfile implements DbObject {
+public class UserProfile implements DbObject, Serializable {
     private String name = "";
     private String paypal = "";
     private boolean showNotifs = true;

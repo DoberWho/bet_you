@@ -76,7 +76,8 @@ public class LoginFragment extends BaseFrg {
 
         showLoading(true);
         hideKeyb();
-        AuthController.init(getActivity()).login(email, pass, new AuthListener() {
+
+        AuthListener listener = new AuthListener() {
             @Override
             public void isOk(FirebaseUser user) {
                 String msg = getString(R.string.request_login_ok);
@@ -90,7 +91,8 @@ public class LoginFragment extends BaseFrg {
                 showLoading(false);
                 showError(error);
             }
-        });
+        };
+        AuthController.init(getActivity()).login(email, pass, listener);
     }
 
 }
